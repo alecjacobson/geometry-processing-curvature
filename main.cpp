@@ -86,20 +86,6 @@ D,d      Show principal directions
         scale *= key=='S' ? 2.0 : 0.5;
         std::cout<<"Color axis range: ["<<-scale<<","<<scale<<"]"<<std::endl;
         break;
-      case ' ':
-      {
-        const int width=2560;
-        const int height = 
-          (viewer.core.viewport(3)/ viewer.core.viewport(2)) * width;
-        Eigen::Matrix<unsigned char,Eigen::Dynamic,Eigen::Dynamic> 
-          R(width,height), G(width,height), B(width,height), A(width,height);
-        viewer.core.draw_buffer(viewer.data,viewer.opengl,false,R,G,B,A);
-        A.setConstant(255);
-        const std::string prefix = std::string(argv[0])+"-capture-";
-        std::string filename;
-        igl::next_filename(prefix,4,".png",filename);
-        igl::png::writePNG(R,G,B,A,filename);
-      }
       default:
         return false;
     }
