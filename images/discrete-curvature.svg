@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="204.993px" height="109px" viewBox="0 0 204.993 109" enable-background="new 0 0 204.993 109" xml:space="preserve">
+<path fill="none" stroke="#F5B233" stroke-miterlimit="10" d="M100.263,97c1.592-2.646,2.508-5.747,2.507-9.062
+	c0-3.524-1.035-6.806-2.817-9.559"/>
+<polyline fill="none" stroke="#334DCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+	-43.84,-112.005 -2.557,-18.194 41.169,62.499 85.16,87.938 121.464,64.486 152.867,35.866 214.16,7.644 "/>
+<g>
+	<g>
+		
+			<line fill="none" stroke="#334DCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="41.169" y1="62.499" x2="42.035" y2="63"/>
+		
+			<line fill="none" stroke="#334DCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1.9846,2.977" x1="44.612" y1="64.49" x2="150.701" y2="125.84"/>
+		
+			<line fill="none" stroke="#334DCC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="151.99" y1="126.585" x2="152.855" y2="127.086"/>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_1_" x="106.493" y="78.938" width="13" height="16"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_2_)">
+		<text transform="matrix(1 0 0 1 105.7661 91.7627)" fill="#F5B233" font-family="'CMMI10'" font-size="17.9327">θ</text>
+	</g>
+	<g clip-path="url(#SVGID_2_)">
+		<text transform="matrix(1 0 0 1 114.1851 94.4531)" fill="#F5B233" font-family="'CMMI7'" font-size="12.5528">i</text>
+	</g>
+</g>
+<circle fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="85.16" cy="87.938" r="2.581"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="121.91" cy="63.688" r="2.581"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="41.169" cy="62.499" r="2.581"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="152.867" cy="35.866" r="2.581"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="-2.581" cy="-18.001" r="2.581"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="214.16" cy="7.616" r="2.581"/>
+<g>
+	<defs>
+		<rect id="SVGID_3_" x="70.623" y="92.327" width="16" height="12"/>
+	</defs>
+	<clipPath id="SVGID_4_">
+		<use xlink:href="#SVGID_3_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_4_)">
+		<text transform="matrix(1 0 0 1 70.4639 100.75)" font-family="'CMBX10'" font-size="17.9327">v</text>
+	</g>
+	<g clip-path="url(#SVGID_4_)">
+		<text transform="matrix(1 0 0 1 81.3477 103.4404)" font-family="'CMMI7'" font-size="12.5528">i</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_5_" x="12.493" y="67" width="34" height="12"/>
+	</defs>
+	<clipPath id="SVGID_6_">
+		<use xlink:href="#SVGID_5_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_6_)">
+		<text transform="matrix(1 0 0 1 12.9546 75.4238)" font-family="'CMBX10'" font-size="17.9327">v</text>
+	</g>
+	<g clip-path="url(#SVGID_6_)">
+		<text transform="matrix(1 0 0 1 23.8394 78.1143)" font-family="'CMMI7'" font-size="12.5528">i</text>
+	</g>
+	<g clip-path="url(#SVGID_6_)">
+		<text transform="matrix(1 0 0 1 28.9136 78.1143)" font-family="'CMSY7'" font-size="12.5528">−</text>
+	</g>
+	<g clip-path="url(#SVGID_6_)">
+		<text transform="matrix(1 0 0 1 40.1196 78.1143)" font-family="'CMR7'" font-size="12.5528">1</text>
+	</g>
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_7_" x="126.491" y="63.688" width="33" height="13"/>
+	</defs>
+	<clipPath id="SVGID_8_">
+		<use xlink:href="#SVGID_7_"  overflow="visible"/>
+	</clipPath>
+	<g clip-path="url(#SVGID_8_)">
+		<text transform="matrix(1 0 0 1 126.2534 72.1123)" font-family="'CMBX10'" font-size="17.9327">v</text>
+	</g>
+	<g clip-path="url(#SVGID_8_)">
+		<text transform="matrix(1 0 0 1 137.1372 74.8027)" font-family="'CMMI7'" font-size="12.5528">i</text>
+	</g>
+	<g clip-path="url(#SVGID_8_)">
+		<text transform="matrix(1 0 0 1 142.2104 74.8027)" font-family="'CMR7'" font-size="12.5528">+1</text>
+	</g>
+</g>
+</svg>

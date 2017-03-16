@@ -2,8 +2,6 @@
 #include "include/principal_curvatures.h"
 #include "include/mean_curvature.h"
 #include <igl/avg_edge_length.h>
-#include <igl/png/writePNG.h>
-#include <igl/next_filename.h>
 #include <igl/read_triangle_mesh.h>
 #include <igl/parula.h>
 #include <igl/doublearea.h>
