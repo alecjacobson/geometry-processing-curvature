@@ -82,6 +82,13 @@ on a given mesh:</p>
 <pre><code>./curvature [path to mesh.obj]
 </code></pre>
 
+<figure>
+<img src="images/elephant-curvatures.jpg" alt="Once built you may toggle between showing Gaussian curvature, mean/min/max
+curvature and displaying principal curvature directions." />
+<figcaption>Once built you may toggle between showing Gaussian curvature, mean/min/max
+curvature and displaying principal curvature directions.</figcaption>
+</figure>
+
 <h2 id="background">Background</h2>
 
 <p>In this assignment we explore discrete curvature quantities computed on a
@@ -783,7 +790,8 @@ a non-trivial curvature value is a quadratic surface.</p>
 w = a₁ u + a₂ v + a₃ u² + a₄uv + a₅v².
 \]</span>
  We have <span class="math">\(k\)</span> sets of <span class="math">\(u,v\)</span> values and <span class="math">\(w\)</span> values. Treat this as a
- least-squares fitting problem and solve for the 5 unknown coefficients.</li>
+ least-squares fitting problem and solve for the 5 unknown coefficients.
+ (<code>igl::pinv</code> is good for solving this robustly).</li>
 <li>Each element of the shape operator for the graph of a quadratic function
  over the plane has a closed form expression. You need to derive these by hand.
  Just kidding. The shape operator can be constructed as the product of two
@@ -815,6 +823,9 @@ g = \frac{2a₅}{\sqrt{a₁² + 1 + a₂²}}
 \]</span>
  See Table 1 of &#8220;Estimating Differential Quantities Using Polynomial Fitting of
  Osculating Jets&#8221; [Cazals &amp; Pouget 2003] to double check for typos :-).</li>
+<li>Eigen decomposition of <span class="math">\(S\)</span> reveals the principal curvatures <span class="math">\(k₁\)</span> and <span class="math">\(k₂\)</span>
+ <em>and</em> the principal tangent directions (in the <span class="math">\(uv\)</span> PCA basis).</li>
+<li>Lift the principal tangent directions back to world <span class="math">\(\R³\)</span> coordinates.</li>
 </ol>
 
 <h2 id="tasks">Tasks</h2>
@@ -835,18 +846,38 @@ missing proofs above.</p>
 <h3 id="whitelist">Whitelist</h3>
 
 <ul>
+<li><code>igl::adjacency_matrix.h</code></li>
 <li><code>igl::cotmatrix</code></li>
+<li><code>igl::invert_diag</code></li>
 <li><code>igl::massmatrix</code></li>
 <li><code>igl::per_vertex_normals</code></li>
+<li><code>igl::pinv</code></li>
+<li><code>igl::slice</code></li>
+<li><code>igl::sort</code></li>
+<li><code>igl::squared_edge_lengths</code></li>
 </ul>
 
 <h3 id="srcmean_curvature.cpp"><code>src/mean_curvature.cpp</code></h3>
 
+<p>Compute the discrete mean curvature at each vertex of a mesh (<code>V</code>,<code>F</code>) by
+taking the signed magnitude of the mean curvature normal as a <em>pointwise</em> (or
+<em>integral average</em>) quantity.</p>
+
 <h3 id="srcinternal_angles.cpp"><code>src/internal_angles.cpp</code></h3>
+
+<p>Given (squared) edge-lengths of a triangle mesh <code>l_sqr</code> compute the internal
+angles at each corner (a.k.a. wedge) of the mesh.</p>
 
 <h3 id="srcangle_defect.cpp"><code>src/angle_defect.cpp</code></h3>
 
+<p>Compute the discrete angle defect at each vertex of a triangle mesh
+(<code>V</code>,<code>F</code>), that is, the <em>locally integrated</em> discrete Gaussian
+curvature.</p>
+
 <h3 id="srcprincipal_curvatures.cpp"><code>src/principal_curvatures.cpp</code></h3>
+
+<p>Approximate principal curvature values and directions locally by considering
+the two-ring neighborhood of each vertex in the mesh (<code>V</code>,<code>F</code>).</p>
 
 </body>
 </html>

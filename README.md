@@ -17,6 +17,9 @@ on a given mesh:
 
     ./curvature [path to mesh.obj]
 
+![Once built you may toggle between showing Gaussian curvature, mean/min/max
+curvature and displaying principal curvature directions.](images/elephant-curvatures.jpg)
+
 ## Background
 
 In this assignment we explore discrete curvature quantities computed on a
