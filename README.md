@@ -82,7 +82,7 @@ $C(\q₁,\p,\q₂)$ that passes
 through $\p$ and points $\q₁$ and $\q₂$ before and after it on the curve:
 
 \\[
-C(\p) = \lim{\q₁,\q₂→\p} C(\q₁,\p,\q₂).
+C(\p) = \lim_{\q₁,\q₂→\p} C(\q₁,\p,\q₂).
 \\]
 
 ![](images/osculating-circle.gif)
@@ -124,9 +124,9 @@ equivalently the magnitude of second derivative of the curve:
 
 Because we chose the arc-length parameterization, the only change to the
 tangent vector $γ'$ is a change in _direction_ (as opposed to magnitude, since
-$‖γ'‖ := 1$). This means that the change as a vector itself is _orthogonal_ to
-the tangent. In other words, the change in tangent $γ''$ points along the
-normal direction $\hat{\n}$:
+$‖γ'‖ := 1$). This means that the change--as a vector itself--is
+_orthogonal_ to the tangent. In other words, the change in tangent $γ''$ points
+along the normal direction $\hat{\n}$:
 
 \\[
 γ'' ⋅ γ' = 0 \quad → \quad γ'' ⋅ \hat{\n} = ± κ \hat{\n}.
@@ -200,9 +200,9 @@ This is a bit surprising at first glance. However, in the _moving point
 analogy_ a closed curve corresponds to a period trajectory (e.g., driving
 around a race-track). When we've made it once around the track, our velocity
 direction (e.g., the direction the vehicle is facing) must be pointing in the
-original direction. That is, during the course, the car either turned all the
+original direction. That is, during the course, the car either have turned all the
 way around once ($τ = 1$) or turned as much clockwise and it did
-counter-clockwise (e.g., on a figure 8 course: $τ=0$), or so made multiple
+counter-clockwise (e.g., on a figure 8 course: $τ=0$), or made multiple
 loops, etc.
 
 #### Discrete curvature
@@ -486,6 +486,7 @@ stating that the total Gaussian curvature must be an integer multiple of $2π$:
 
 \\[
 ∫_S K dA = 2π χ(\S),
+\label{equ:gauss-bonnet}
 \\]
 where $χ(\S)$ is the [Euler
 characteristic](https://en.wikipedia.org/wiki/Euler_characteristic) of the
@@ -517,7 +518,7 @@ S_\p(\v) := ∇ \n ⋅ \v
 \\]
 we call $S_\p$ the [_**shape
 operator**_](https://en.wikipedia.org/wiki/Differential_geometry_of_surfaces#Shape_operator)
-at the point $\p$. Just as how in Equation $(\ref{equ:curvature-normal})$) the
+at the point $\p$. Just as how in Equation $(\ref{equ:curvature-normal})$ the
 curvature normal must point in the normal direction, the shape operator takes
 as input a tangent vector and outputs another tangent vector (i.e., the change
 in the unit normal must be tangential to the surface; no change can occur in
@@ -620,7 +621,12 @@ H\n ≈ \H = \M^{-1} \L \V ∈ \R^{n×3}.
 Stripping the magnitude off the rows of the resulting matrix would give the
 _unsigned_ mean curvature. To make sure that the sign is preserved we can check
 whether each row in $\H$ agrees or disagrees with consistently oriented
-per-vertex normals in $\N ∈ \R^{n×3}$.
+per-vertex normals in $\N ∈ \R^{n×3}$. 
+
+This connection between the Laplace operator and the mean curvature normal
+provides additional understanding for its use as a geometric smoothing operator
+(see "Computing Discrete Minimal Surfaces and Their Conjugates" [Pinkall and
+Polthier 1993]).
 
 #### Discrete Gaussian curvature via angle defect
 
@@ -633,7 +639,7 @@ all faces incident on a vertex. This hints that discrete Gaussian curvature
 (like curvature for curves) must live at vertices.
 
 Using the definition of Gaussian curvature in terms of the area on the Gauss
-map in Equation $(\ref{equ:gaussian-curvature-area})$): flat faces correspond
+map in Equation $(\ref{equ:gaussian-curvature-area})$: flat faces correspond
 points on the Gauss map (contributing nothing), edges correspond to area-less
 curves (traced by their [dihedral
 angles](https://en.wikipedia.org/wiki/Dihedral_angle)), but vertices correspond
@@ -658,8 +664,27 @@ _pointwise_) discrete Gaussian curvature is the angle defect divided by the
 local area associated with the $i$-th vertex:
 
 \\[
-K_i = \frac{2π - ∑\limits_{f ∈ \text{faces(i)}} θ_{if}}{A_i}
+K_i = \frac{2π - ∑\limits_{f ∈ \text{faces(i)}} θ_{if}}{A_i}.
 \\]
+
+By way of closing up the Gauss map, closed polyhedral surfaces (i.e., meshes)
+will obey the
+[Gauss-Bonnet](https://en.wikipedia.org/wiki/Gauss–Bonnet_theorem) in Equation 
+$(\ref{equ:gauss-bonnet})$, too:
+
+\\[
+∑\limits_{i=1}^n K_i = 2π χ(\S).
+\\]
+
+We can connect this to [Euler's
+formula](https://en.wikipedia.org/wiki/Euler_characteristic) for polyhedra in our very first
+assignment:
+
+\\[
+\frac{1}{2π} ∑\limits_{i=1}^n K_i =  |V| - |E| + |F|,
+\\]
+where $|V|, |E|, |F|$ are the number of vertices, edges and faces respectively.
+
 
 
 #### Approximation and eigen decomposition of the shape operator 

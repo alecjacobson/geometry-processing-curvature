@@ -155,7 +155,7 @@ that <span class="math">\(\|γ'\| = 1\)</span> and therefor the unit tangent vec
 through <span class="math">\(\p\)</span> and points <span class="math">\(\q₁\)</span> and <span class="math">\(\q₂\)</span> before and after it on the curve:</p>
 
 <p><span class="math">\[
-C(\p) = \lim{\q₁,\q₂→\p} C(\q₁,\p,\q₂).
+C(\p) = \lim_{\q₁,\q₂→\p} C(\q₁,\p,\q₂).
 \]</span></p>
 
 <figure>
@@ -199,9 +199,9 @@ equivalently the magnitude of second derivative of the curve:</p>
 
 <p>Because we chose the arc-length parameterization, the only change to the
 tangent vector <span class="math">\(γ'\)</span> is a change in <em>direction</em> (as opposed to magnitude, since
-<span class="math">\(‖γ'‖ := 1\)</span>). This means that the change as a vector itself is <em>orthogonal</em> to
-the tangent. In other words, the change in tangent <span class="math">\(γ''\)</span> points along the
-normal direction <span class="math">\(\hat{\n}\)</span>:</p>
+<span class="math">\(‖γ'‖ := 1\)</span>). This means that the change&#8211;as a vector itself&#8211;is
+<em>orthogonal</em> to the tangent. In other words, the change in tangent <span class="math">\(γ''\)</span> points
+along the normal direction <span class="math">\(\hat{\n}\)</span>:</p>
 
 <p><span class="math">\[
 γ'' ⋅ γ' = 0 \quad → \quad γ'' ⋅ \hat{\n} = ± κ \hat{\n}.
@@ -277,9 +277,9 @@ where τ is an integer called the &#8220;turning number&#8221; of the curve. </p
 analogy</em> a closed curve corresponds to a period trajectory (e.g., driving
 around a race-track). When we&#8217;ve made it once around the track, our velocity
 direction (e.g., the direction the vehicle is facing) must be pointing in the
-original direction. That is, during the course, the car either turned all the
+original direction. That is, during the course, the car either have turned all the
 way around once (<span class="math">\(τ = 1\)</span>) or turned as much clockwise and it did
-counter-clockwise (e.g., on a figure 8 course: <span class="math">\(τ=0\)</span>), or so made multiple
+counter-clockwise (e.g., on a figure 8 course: <span class="math">\(τ=0\)</span>), or made multiple
 loops, etc.</p>
 
 <h4 id="discretecurvature">Discrete curvature</h4>
@@ -576,6 +576,7 @@ stating that the total Gaussian curvature must be an integer multiple of <span c
 
 <p><span class="math">\[
 ∫_S K dA = 2π χ(\S),
+\label{equ:gauss-bonnet}
 \]</span>
 where <span class="math">\(χ(\S)\)</span> is the <a href="https://en.wikipedia.org/wiki/Euler_characteristic">Euler
 characteristic</a> of the
@@ -609,7 +610,7 @@ S_\p(\v) := ∇ \n ⋅ \v
 \]</span>
 we call <span class="math">\(S_\p\)</span> the <a href="https://en.wikipedia.org/wiki/Differential_geometry_of_surfaces#Shape_operator"><em><strong>shape
 operator</strong></em></a>
-at the point <span class="math">\(\p\)</span>. Just as how in Equation <span class="math">\((\ref{equ:curvature-normal})\)</span>) the
+at the point <span class="math">\(\p\)</span>. Just as how in Equation <span class="math">\((\ref{equ:curvature-normal})\)</span> the
 curvature normal must point in the normal direction, the shape operator takes
 as input a tangent vector and outputs another tangent vector (i.e., the change
 in the unit normal must be tangential to the surface; no change can occur in
@@ -714,7 +715,12 @@ H\n ≈ \H = \M^{-1} \L \V ∈ \R^{n×3}.
 <p>Stripping the magnitude off the rows of the resulting matrix would give the
 <em>unsigned</em> mean curvature. To make sure that the sign is preserved we can check
 whether each row in <span class="math">\(\H\)</span> agrees or disagrees with consistently oriented
-per-vertex normals in <span class="math">\(\N ∈ \R^{n×3}\)</span>.</p>
+per-vertex normals in <span class="math">\(\N ∈ \R^{n×3}\)</span>. </p>
+
+<p>This connection between the Laplace operator and the mean curvature normal
+provides additional understanding for its use as a geometric smoothing operator
+(see &#8220;Computing Discrete Minimal Surfaces and Their Conjugates&#8221; [Pinkall and
+Polthier 1993]).</p>
 
 <h4 id="discretegaussiancurvatureviaangledefect">Discrete Gaussian curvature via angle defect</h4>
 
@@ -727,7 +733,7 @@ all faces incident on a vertex. This hints that discrete Gaussian curvature
 (like curvature for curves) must live at vertices.</p>
 
 <p>Using the definition of Gaussian curvature in terms of the area on the Gauss
-map in Equation <span class="math">\((\ref{equ:gaussian-curvature-area})\)</span>): flat faces correspond
+map in Equation <span class="math">\((\ref{equ:gaussian-curvature-area})\)</span>: flat faces correspond
 points on the Gauss map (contributing nothing), edges correspond to area-less
 curves (traced by their <a href="https://en.wikipedia.org/wiki/Dihedral_angle">dihedral
 angles</a>), but vertices correspond
@@ -755,8 +761,26 @@ as the angle defect at the <span class="math">\(i\)</span>-th vertex. The local 
 local area associated with the <span class="math">\(i\)</span>-th vertex:</p>
 
 <p><span class="math">\[
-K_i = \frac{2π - ∑\limits_{f ∈ \text{faces(i)}} θ_{if}}{A_i}
+K_i = \frac{2π - ∑\limits_{f ∈ \text{faces(i)}} θ_{if}}{A_i}.
 \]</span></p>
+
+<p>By way of closing up the Gauss map, closed polyhedral surfaces (i.e., meshes)
+will obey the
+<a href="https://en.wikipedia.org/wiki/Gauss–Bonnet_theorem">Gauss-Bonnet</a> in Equation
+<span class="math">\((\ref{equ:gauss-bonnet})\)</span>, too:</p>
+
+<p><span class="math">\[
+∑\limits_{i=1}^n K_i = 2π χ(\S).
+\]</span></p>
+
+<p>We can connect this to <a href="https://en.wikipedia.org/wiki/Euler_characteristic">Euler&#8217;s
+formula</a> for polyhedra in our very first
+assignment:</p>
+
+<p><span class="math">\[
+\frac{1}{2π} ∑\limits_{i=1}^n K_i =  |V| - |E| + |F|,
+\]</span>
+where <span class="math">\(|V|, |E|, |F|\)</span> are the number of vertices, edges and faces respectively.</p>
 
 <h4 id="approximationandeigendecompositionoftheshapeoperator">Approximation and eigen decomposition of the shape operator</h4>
 
