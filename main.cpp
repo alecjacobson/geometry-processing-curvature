@@ -32,8 +32,6 @@ int main(int argc, char *argv[])
   G = D.array()/A.array();
   mean_curvature(V,F,H);
   principal_curvatures(V,F,D1,D2,K1,K2);
-  std::cout << "H: " << H.transpose() << std::endl;
-  std::cout << (.5 * ( K1 + K2).transpose()).eval() << std::endl;
 
   igl::viewer::Viewer viewer;
   std::cout<<R"(

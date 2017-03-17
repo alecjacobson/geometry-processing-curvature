@@ -4,6 +4,7 @@
 #include <Eigen/Eigenvalues>
 #include <igl/pinv.h>
 #include <iostream>
+#include <igl/principal_curvature.h>
 
 void principal_curvatures(
   const Eigen::MatrixXd & V,
@@ -13,6 +14,9 @@ void principal_curvatures(
   Eigen::VectorXd & K1,
   Eigen::VectorXd & K2)
 {
+#ifdef USE_IGL_PRINCIPAL_CURVATURE
+    igl::principal_curvature(V,F,D1,D2,K1,K2);
+#else
   // Replace with your code
   K1 = Eigen::VectorXd::Zero(V.rows());
   K2 = Eigen::VectorXd::Zero(V.rows());
@@ -41,16 +45,20 @@ void principal_curvatures(
       Eigen::Matrix<double,2,3> uv = uv_eig.eigenvectors().block(0,1,3,2).transpose();
       Eigen::RowVector3d w = uv_eig.eigenvectors().col(0).transpose();
       Eigen::VectorXd B = P * w.transpose();
-      std::cout << B.transpose() << std::endl;
       Eigen::MatrixXd LC = P * uv.transpose();
 
+
       Eigen::MatrixXd data(LC.rows(),5);
-      data.col(0) = LC.col(0);
-      data.col(1) = LC.col(1);
-      data.col(2) = LC.col(0).array().pow(2);
-      data.col(3) = LC.col(1).rowwise().prod();
-      data.col(4) = LC.col(1).array().pow(2);
-      Eigen::VectorXd A = data.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV).solve(B);
+      data.col(0) = LC.col(0);//u
+      data.col(1) = LC.col(1);//v
+      data.col(2) = LC.col(0).array().pow(2);//u^2
+      data.col(3) = LC.rowwise().prod();//uv
+      data.col(4) = LC.col(1).array().pow(2);//v^2
+      Eigen::MatrixXd data_inv;
+      igl::pinv(data,data_inv);
+      Eigen::VectorXd A = data_inv * B;
+
+
 
       Eigen::Matrix2d f1;
       Eigen::Matrix2d f2;
@@ -65,14 +73,13 @@ void principal_curvatures(
       f2(1,0) = f2(0,1) = A(3) / denom;
       f2(1,1) = 2 * A(4) / denom;
 
+
       Eigen::Matrix2d S = -f2 * f1.inverse();
       Eigen::SelfAdjointEigenSolver<Eigen::Matrix2d> S_eig(S);
 
-      Eigen::Matrix<double,2,3> PD = (uv.transpose() * S_eig.eigenvectors()).transpose();
+      Eigen::Matrix<double,2,3> PD = (uv.transpose() * S_eig.eigenvectors().transpose()).transpose();
       Eigen::Vector2d PC = S_eig.eigenvalues();
 
-      std::cout << "UV norms: " << uv.transpose().colwise().norm() << std::endl;
-      std::cout << "S norms: " << S_eig.eigenvectors().colwise().norm() << std::endl;
      
       K1(k) = PC(0);
       K2(k) = PC(1);
@@ -82,4 +89,5 @@ void principal_curvatures(
 
   }
 
+#endif
 }
