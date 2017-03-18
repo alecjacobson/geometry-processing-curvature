@@ -21,6 +21,4 @@ void mean_curvature(
         v = 1.0/v;
     }
     H = ((.5 * M * L * V).array() * N.array()).rowwise().sum();
-    std::cout << "Mean curvature!" << std::endl;
-    std::cout << H.transpose() << std::endl;
 }
