@@ -3,8 +3,8 @@
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues>
 #include <igl/pinv.h>
-#include <iostream>
 #include <igl/principal_curvature.h>
+#include <igl/per_vertex_normals.h>
 
 void principal_curvatures(
   const Eigen::MatrixXd & V,
@@ -14,6 +14,7 @@ void principal_curvatures(
   Eigen::VectorXd & K1,
   Eigen::VectorXd & K2)
 {
+//#define USE_IGL_PRINCIPAL_CURVATURE
 #ifdef USE_IGL_PRINCIPAL_CURVATURE
     igl::principal_curvature(V,F,D1,D2,K1,K2);
 #else
@@ -24,6 +25,8 @@ void principal_curvatures(
   D2 = Eigen::MatrixXd::Zero(V.rows(),3);
 
 
+  Eigen::MatrixXd N;
+  igl::per_vertex_normals(V,F,N);
   Eigen::SparseMatrix<double> A;
   igl::adjacency_matrix(F,A);
 
@@ -31,10 +34,10 @@ void principal_curvatures(
 
 
   for(int k=0; k<A2.outerSize(); ++k) {
-      int size = A.innerVector(k).nonZeros();
+      int size = A2.innerVector(k).nonZeros();
       Eigen::MatrixXd P(size,3);
       int count = 0;
-      for(typename Eigen::SparseMatrix<double>::InnerIterator it (A,k); it; ++it) {
+      for(typename Eigen::SparseMatrix<double>::InnerIterator it (A2,k); it; ++it) {
           P.row(count++) = V.row(it.index());
       }
       P.rowwise() -= V.row(k);
@@ -44,6 +47,11 @@ void principal_curvatures(
 
       Eigen::Matrix<double,2,3> uv = uv_eig.eigenvectors().block(0,1,3,2).transpose();
       Eigen::RowVector3d w = uv_eig.eigenvectors().col(0).transpose();
+
+      if(N.row(k) * w.transpose() < 0) {
+          w = -w;
+      }
+
       Eigen::VectorXd B = P * w.transpose();
       Eigen::MatrixXd LC = P * uv.transpose();
 
@@ -54,6 +62,7 @@ void principal_curvatures(
       data.col(2) = LC.col(0).array().pow(2);//u^2
       data.col(3) = LC.rowwise().prod();//uv
       data.col(4) = LC.col(1).array().pow(2);//v^2
+      
       Eigen::MatrixXd data_inv;
       igl::pinv(data,data_inv);
       Eigen::VectorXd A = data_inv * B;
@@ -77,15 +86,23 @@ void principal_curvatures(
       Eigen::Matrix2d S = -f2 * f1.inverse();
       Eigen::SelfAdjointEigenSolver<Eigen::Matrix2d> S_eig(S);
 
-      Eigen::Matrix<double,2,3> PD = (uv.transpose() * S_eig.eigenvectors().transpose()).transpose();
+      Eigen::Matrix<double,2,3> PD = (uv.transpose() * S_eig.eigenvectors()).transpose();
       Eigen::Vector2d PC = S_eig.eigenvalues();
 
-     
-      K1(k) = PC(0);
-      K2(k) = PC(1);
+      int mi = 0;
+      int Mi = 1;
+      if(PC(0) > PC(1)) {
 
-      D1.row(k) = PD.row(0);
-      D2.row(k) = PD.row(1);
+          mi = 1;
+          Mi = 0;
+
+      }
+      K1(k) = PC(mi);
+      K2(k) = PC(Mi);
+
+      D1.row(k) = PD.row(mi);
+      D2.row(k) = PD.row(Mi);
+
 
   }
 
