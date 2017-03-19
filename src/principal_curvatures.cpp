@@ -6,6 +6,9 @@
 #include <unordered_set>
 #include <Eigen/Eigenvalues>
 
+
+#include <igl/principal_curvature.h>
+
 void principal_curvatures(
 	const Eigen::MatrixXd & V,
 	const Eigen::MatrixXi & F,
@@ -57,12 +60,23 @@ void principal_curvatures(
 		P.rowwise() -= V.row(v);
 
 		//Now do principle component analysis on P. 
+		Eigen::RowVector3d mean = P.colwise().mean();
+
+		P.rowwise() -= mean;
+
 		Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> eigen(P.transpose()*P);
-		Eigen::Matrix<double, 3, 2> rotation = eigen.eigenvectors().block(0, 1, 3, 2);
+
+		Eigen::Vector3d sorted_eigenvalues;
+		Eigen::Vector3i sorted_indices;
+		igl::sort(eigen.eigenvalues().cwiseAbs(),1, false, sorted_eigenvalues,sorted_indices);
+
+		
+		Eigen::Matrix<double, 3, 2> rotation;
+		igl::slice(eigen.eigenvectors(), sorted_indices.head(2), 2, rotation);
 		Eigen::MatrixXd S(P.rows(), 2);
 		Eigen::VectorXd B(P.rows());
 
-		Eigen::Matrix<double, 3, 1> height = eigen.eigenvectors().block(0, 0, 3, 1);
+		Eigen::Matrix<double, 3, 1> height = eigen.eigenvectors().col(sorted_indices(2));
 		for (int i = 0; i < P.rows(); i++) {
 			S.row(i) = P.row(i) * rotation;
 			B.row(i) = P.row(i) * height;
@@ -103,14 +117,26 @@ void principal_curvatures(
 
 		{
 			Eigen::EigenSolver<Eigen::Matrix2d> eigensolver(shape_operator);
-			K1(v) = eigensolver.eigenvalues()(0).real();
-			K2(v) = eigensolver.eigenvalues()(1).real();
+			double k1 = eigensolver.eigenvalues()(0).real();
+			double k2 = eigensolver.eigenvalues()(1).real();
 
 			auto eigenvecs = eigensolver.eigenvectors();
 			//Now need to convert the eigenvectors back to the cartesian space.
-			D1.row(v) = (rotation*eigenvecs.col(0).real()).transpose();
-			D2.row(v) = (rotation*eigenvecs.col(1).real()).transpose();
+			
+			if (abs(k1) < abs(k2)) {
+				K1(v) = k1;
+				K2(v) = k2;
+				D1.row(v) = (rotation*eigenvecs.col(0).real()).transpose() + mean;
+				D2.row(v) = (rotation*eigenvecs.col(1).real()).transpose() + mean;
+			} else {
+				K1(v) = k2;
+				K2(v) = k1;
+				D1.row(v) = (rotation*eigenvecs.col(1).real()).transpose() + mean;
+				D2.row(v) = (rotation*eigenvecs.col(0).real()).transpose() + mean;
+			}
 		}
 	}
+	//Think the solution is when doing the PCA - sort the eigenvectors based on the absolute value of the eigenvalues?
+
 
 }
