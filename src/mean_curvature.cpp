@@ -22,16 +22,11 @@ void mean_curvature(
 
 	MatrixXd H_vec(M*(-L)*V);
 
-	//H = H_vec.rowwise().norm();
-
 	MatrixXd N;
 	igl::per_vertex_normals(V, F, N);
 
-	//for (int i = 0; i < H_vec.rows(); ++i)
-	//	if (H_vec.row(i).dot(N.row(i)) < 0)
-	//		H(i) *= -1;
-
 	H.resize(H_vec.rows());
+
 	for (int i = 0; i < H_vec.rows(); ++i)
 		H(i) = H_vec.row(i).dot(N.row(i));
 }
