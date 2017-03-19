@@ -26,11 +26,14 @@ void principal_curvatures(
   Eigen::EigenSolver<Eigen::MatrixXd> es;
   std::set<int> neighbours, neighbours2;
   for (int i = 0; i < num_v; i++) {
+    // ensure empty neighbour set;
+    neighbours.clear();
+    neighbours2.clear();
+    
     // Find out neighbours
     for (Eigen::SparseMatrix<double>::InnerIterator it(adjacency, i); it; ++it) {
       neighbours.insert(it.index());
     }
-    std::cout << "got 1st neighbours" << std::endl;
     
     // Find out neighbours of neighbours
     std::set<int>::iterator s_it;
@@ -39,7 +42,6 @@ void principal_curvatures(
         neighbours2.insert(it.index());
       }
     }
-    std::cout << "got 2nd neighbours" << std::endl;
     
     // Combine neighbours and neighbours-of-neighbours
     neighbours.insert(neighbours2.begin(), neighbours2.end());
@@ -49,7 +51,6 @@ void principal_curvatures(
     for (int j = 0; j < neighbours.size(); j++) {
       P.row(j) = V.row(j) - V.row(i);
     }
-    std::cout << "constructed P" << std::endl;
     
     // Perform PCA on P
     es.compute(P.transpose() * P);
@@ -62,7 +63,6 @@ void principal_curvatures(
     S.col(0) = new_P.col(0);
     S.col(1) = new_P.col(1);
     B = new_P.col(2);
-    std::cout << "set up S and B" << std::endl;
     
     // Now we form the coefficients for a
     Eigen::MatrixXd coeff_a(P.rows(), 5), coeff_a_inv(5, P.rows());
@@ -74,7 +74,6 @@ void principal_curvatures(
     coeff_a.col(4) = (S.col(1).array().square()).matrix();
     igl::pinv(coeff_a, coeff_a_inv);
     a = coeff_a_inv * B;
-    std::cout << "solved for a" << std::endl;
     
     // Derive e, f, g, E, F, G
     double E = 1 + pow(a[0], 2);
@@ -83,7 +82,6 @@ void principal_curvatures(
     double e = (2 * a[2]) / sqrt(pow(a[0], 2) + 1 + pow(a[1], 2));
     double f = a[3] / sqrt(pow(a[0], 2) + 1 + pow(a[1], 2));
     double g = (2 * a[4]) / sqrt(pow(a[0], 2) + 1 + pow(a[1], 2));
-    std::cout << "derived efg" << std::endl;
     
     // Construct S
     Eigen::Matrix2d s1, s2;
@@ -92,7 +90,6 @@ void principal_curvatures(
     s2 << E, F,
           F, G;
     S = -s1 * s2.inverse();
-    std::cout << "got S" << std::endl;
     
     // Eigen Decomposition of S
     es.compute(S);
@@ -107,6 +104,5 @@ void principal_curvatures(
     D2.row(i) = final_eigvecs.col(1);
     K1[i] = es.eigenvalues().real()[0];
     K2[i] = es.eigenvalues().real()[1];
-    std::cout << "finished" << std::endl;
   }
 }
