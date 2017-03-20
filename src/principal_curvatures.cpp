@@ -1,6 +1,8 @@
 #include "../include/principal_curvatures.h"
 #include <igl/adjacency_matrix.h>
+#include <igl/per_vertex_normals.h>
 #include <igl/pinv.h>
+#include <igl/sort.h>
 #include <Eigen/Eigenvalues>
 #include <set>
 #include <iostream>
@@ -21,6 +23,9 @@ void principal_curvatures(
   
   Eigen::SparseMatrix<double> adjacency(num_v, num_v);
   igl::adjacency_matrix(F, adjacency);
+  
+  Eigen::MatrixXd N(V.rows(), 3);
+  igl::per_vertex_normals(V, F, N);
   
   Eigen::MatrixXd P;
   Eigen::EigenSolver<Eigen::MatrixXd> es;
@@ -55,11 +60,22 @@ void principal_curvatures(
     // Perform PCA on P
     es.compute(P.transpose() * P);
     
+    // Find the basis for the plane
+    Eigen::Matrix3d sorted_plane_eigvecs, IX;
+    igl::sort(es.eigenvectors().real(), 1, false, sorted_plane_eigvecs, IX);
+    Eigen::Vector3d t1, t2;
+    t1 = sorted_plane_eigvecs.col(0);
+    t2 = sorted_plane_eigvecs.col(1);
+    Eigen::Matrix3d Q;
+    Q.col(0) = t1;
+    Q.col(1) = t2;
+    Q.col(2) = N.row(i);
+    
     // Now for each neighbour k in P, we find u, v, and w coefficients
-    Eigen::MatrixXd new_P(P.rows(), 3), S(P.rows(), 2);
-    Eigen::VectorXd B(P.rows());
-    Eigen::Matrix3d Q = es.eigenvectors().real();
+    Eigen::MatrixXd new_P(P.rows(), 3); 
     new_P = P * Q;
+    Eigen::MatrixXd S(P.rows(), 2);
+    Eigen::VectorXd B(P.rows());
     S.col(0) = new_P.col(0);
     S.col(1) = new_P.col(1);
     B = new_P.col(2);
@@ -89,20 +105,27 @@ void principal_curvatures(
           f, g;
     s2 << E, F,
           F, G;
-    S = -s1 * s2.inverse();
+    S = (-s1 * s2.inverse()).transpose();
     
     // Eigen Decomposition of S
     es.compute(S);
-
-    // Assign directions and curvatures
-    Eigen::Matrix3d eigvecs;
-    eigvecs.setZero();
-    eigvecs.block(0,0,2,2) = es.eigenvectors().real();
     
-    Eigen::Matrix3d final_eigvecs = eigvecs * Q.transpose();
+    // Assign directions and curvatures
+    Eigen::Matrix3d curv_eigvecs, sorted_curv_eigvecs, curv_eigvecs_ix;
+    curv_eigvecs.setZero();
+    curv_eigvecs.block(0,0,2,2) = es.eigenvectors().real();
+    igl::sort(curv_eigvecs, 1, false, sorted_curv_eigvecs, curv_eigvecs_ix);
+    
+    Eigen::VectorXd curv_eigvals, curv_eigvals_ix;
+    igl::sort(es.eigenvalues().real(), 1, false, curv_eigvals, curv_eigvals_ix);
+    curv_eigvals.conservativeResize(3, 1);
+    curv_eigvals[2] = 0;
+    
+    Eigen::Matrix3d final_eigvecs = sorted_curv_eigvecs * Q.transpose();
+    Eigen::Vector3d final_eigvals = Q.transpose() * curv_eigvals;
     D1.row(i) = final_eigvecs.col(0);
     D2.row(i) = final_eigvecs.col(1);
-    K1[i] = es.eigenvalues().real()[0];
-    K2[i] = es.eigenvalues().real()[1];
+    K1[i] = final_eigvals[0];
+    K2[i] = final_eigvals[1];
   }
 }
