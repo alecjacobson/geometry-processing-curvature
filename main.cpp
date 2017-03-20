@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 S,s      Stretch, squish color axis range
 G        Show Gaussian curvature (using principal_curvatures)
 g        Show Gaussian curvature (using angle_defect)
-M        Show Gaussian curvature (using principal_curvatures)
+M        Show discrete mean curvature (using principal_curvatures)
 m        Show discrete mean curvature (using mean_curvature)
 K        Show maximum curvature (using principal_curvatures)
 k        Show minimum curvature (using principal_curvatures)
