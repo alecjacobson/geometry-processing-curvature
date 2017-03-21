@@ -28,7 +28,7 @@ void mean_curvature(
   H.resize(num_v);
   double d;
   for (int i = 0; i < num_v; i++) {
-    d = ( abs(Hn(i,0))/N(i,0) + abs(Hn(i,1))/N(i,1) + abs(Hn(i,2))/N(i,2) ) / 3;
-    H[i] = 0.5 * d;
+    d = 0.5 * Hn.row(i).norm();
+    H[i] = d;
   }
 }
