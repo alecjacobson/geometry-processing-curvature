@@ -39,7 +39,9 @@ void principal_curvatures(
     std::set<int>::iterator s_it;
     for (s_it = neighbours.begin(); s_it != neighbours.end(); ++s_it) {
       for (Eigen::SparseMatrix<double>::InnerIterator it2(adjacency, *s_it); it2; ++it2) {
-        neighbours2.insert(it2.row());
+        if (it2.row() != i) {
+          neighbours2.insert(it2.row());
+        }
       }
     }
     
@@ -49,11 +51,13 @@ void principal_curvatures(
     // Construct P
     Eigen::MatrixXd P;
     P.resize(neighbours.size(), 3);
-    for (int j = 0; j < neighbours.size(); j++) {
-      P.row(j) = V.row(j) - V.row(i);
+    int j = 0;
+    for (s_it = neighbours.begin(); s_it != neighbours.end(); ++s_it) {
+      P.row(j) = V.row(*s_it) - V.row(i);
+      j++;
     }
     
-    // Find basis  for tangent plane: PCA was working horribly, so I'm doing this workaround
+    // Find basis for tangent plane: PCA was working horribly, so I'm doing this workaround
     Eigen::Matrix3d Q;
     Eigen::Vector3d normal = N.row(i);
     Eigen::Vector3d global_axis, tangent_axis;
@@ -70,7 +74,7 @@ void principal_curvatures(
       Q.col(0) = tangent_axis.normalized();
       Q.col(1) = Q.col(0).cross(Q.col(2));
     }
-
+    
     // Now for each neighbour k in P, we find u, v, and w coefficients
     Eigen::MatrixXd new_P(P.rows(), 3); 
     new_P = (Q.transpose() * P.transpose()).transpose();
