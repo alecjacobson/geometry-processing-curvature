@@ -12,7 +12,7 @@ using namespace igl;
 
 void get2ringMatrix(const MatrixXd& V, const SparseMatrix<int>& A, const SparseMatrix<int>& A2, MatrixXd& P, int vIndex)
 {
-	// entry in A(i,j) are non zero if a vertex can be reached with two steps (2 ring).
+	// A2(i,j) is non zero if a vertex can be reached with two steps (2 ring).
 	// one ring should be automatically included since its an undirected graph
 
 	int ring2Size = A2.col(vIndex).nonZeros();
