@@ -7,9 +7,6 @@
 #include <unordered_set>
 #include <Eigen/Eigenvalues>
 
-
-#include <igl/principal_curvature.h>
-
 void principal_curvatures(
 	const Eigen::MatrixXd & V,
 	const Eigen::MatrixXi & F,
@@ -65,7 +62,7 @@ void principal_curvatures(
 		//Now do principle component analysis on P. 
 		Eigen::RowVector3d mean = P.colwise().mean();
 
-		P.rowwise() -= mean;
+		//P.rowwise() -= mean;
 
 		Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> eigen(P.transpose()*P);
 
@@ -129,8 +126,8 @@ void principal_curvatures(
 			double k2 = eigensolver.eigenvalues()(1);
 			auto eigenvecs = eigensolver.eigenvectors();
 			//Now need to convert the eigenvectors back to the cartesian space.
-			Eigen::Vector3d d1 = rotation*eigenvecs.col(0).real() + mean.transpose();
-			Eigen::Vector3d d2 = rotation*eigenvecs.col(1).real() + mean.transpose();
+			Eigen::Vector3d d1 = rotation*eigenvecs.col(0);
+			Eigen::Vector3d d2 = rotation*eigenvecs.col(1);
 			
 			
 			if (k1 < k2) {
@@ -145,5 +142,4 @@ void principal_curvatures(
 			
 		}
 	}
-
 }
