@@ -27,6 +27,4 @@ void mean_curvature(
 	for (int i = 0; i < h_vecs.rows(); i++) {
 		H(i) = (h_vecs.row(i).dot(N.row(i)) < 0) ? h_vecs.row(i).norm() : -h_vecs.row(i).norm();
 	}
-
-	//Unsure about the units, but oh well.
 }
