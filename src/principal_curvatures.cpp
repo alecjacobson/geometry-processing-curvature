@@ -43,7 +43,7 @@ void principal_curvatures(
 	D1 = Eigen::MatrixXd::Zero(V.rows(),3);
 	D2 = Eigen::MatrixXd::Zero(V.rows(),3);
 
-	igl::principal_curvature(V, F, D1, D2, K1, K2); return; //For comparing results
+	//igl::principal_curvature(V, F, D1, D2, K1, K2); return; //For comparing results
 	
 	SparseMatrix<int> A;
 	adjacency_matrix(F, A);
