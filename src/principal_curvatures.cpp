@@ -10,95 +10,6 @@
 #include <vector>
 #include <set>
 
-// from my 1st assignment...
-// we need it to calculate the 2-ring...
-class Edge
-{
-public:
-    Edge( const int &a, const int &b )
-        {
-            // always sort the edges that come in, these are undirected! so {1,2} == {2,1}
-            // so we'll always store E e(2,1) internally as {1,2}.
-            // makes comparing/sorting easier...
-            if( a < b )
-            {
-                m_e[0] = a;
-                m_e[1] = b;
-            }
-            else
-            {
-                m_e[0] = b;
-                m_e[1] = a;
-            }
-            
-            // error!  Degenerate edge!
-            // throw an assert in debug,
-            // optimized out in release :)
-            assert( a != b );
-        }
-    
-    friend bool operator<(const Edge &e1, const Edge &e2 );
-    int getOtherVertex( int v )
-    {
-        if( v == m_e[0] )
-            return m_e[1];
-        else if( v == m_e[1] )
-            return m_e[0];
-        else
-        {
-            assert( false ); // wrong edge, I don't have it!
-            return -1;
-        }
-            
-    }
-
-    int m_e[2];
-};
-
-bool operator<(const Edge &e1, const Edge &e2 )
-{
-    if( e1.m_e[0] < e2.m_e[0] )
-        return true;
-    else if( e2.m_e[0] < e1.m_e[0] )
-        return false;
-    else
-        return( e1.m_e[1] < e2.m_e[1] ); // first element is equal
-}
-
-
-void edges( const Eigen::MatrixXi &F, Eigen::MatrixXi &E )
-{
-  // not the most efficient way to do this, but it's the first assignment...
-  const unsigned int rows = F.rows();
-  
-  std::set<Edge> Edges;
-  for( unsigned int i = 0; i < rows; ++i )
-  {
-    for( int j = 0; j < 3; ++j )
-    {
-        Edges.insert( Edge( F(i,j),
-                            F(i, (j+1)%3 ) )); // yields {0,1}, {1,2} {2,0}
-    }
-  }
-  
-
-  E.resize( Edges.size(), 2 );
-
-  unsigned int i = 0;
-  for( auto && e : Edges )
-  {
-      E( i, 0 ) = e.m_e[0];
-      E( i, 1 ) = e.m_e[1];
-      ++i;
-  }
-
-  // uncomment to see contents of E.
-  // std::cout << "Print E..." << std::endl;
-  // std::cout << E << std::endl;
-}
-
-
-
 void principal_curvatures(
   const Eigen::MatrixXd & V,
   const Eigen::MatrixXi & F,
@@ -120,23 +31,6 @@ void principal_curvatures(
     D1 = Eigen::MatrixXd::Zero(V.rows(),3);
     D2 = Eigen::MatrixXd::Zero(V.rows(),3);
 
-    // typedef std::set< int > Edges;
-    // typedef std::vector< int, Edges > EdgeVerts(n); // given a vertex v, finds the edges it belongs to.
-    // // build the edge map
-    // const int nE = E.rows();
-    // for( int j = 0; j < nE; ++j )
-    // {
-    //     EdgeVerts[ E(e).m_e[0] ].insert( j );
-    //     EdgeVerts[ E(e).m_e[1] ].insert( j );
-    // }
-    
-    // Eigen::MatrixXd l_sqr;
-    // igl::squared_edge_lengths( V, F, l_sqr );
-    
-    // Eigen::MatrixXd A;
-    // internal_angles( l_sqr, A );
-    
-    // igl::principal_curvature( V, F, D1, D2, K1, K2 );
     Eigen::SparseMatrix< double > Madj;
     igl::adjacency_matrix( F, Madj );
     
