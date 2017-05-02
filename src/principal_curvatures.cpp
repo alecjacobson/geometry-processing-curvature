@@ -23,9 +23,6 @@ void principal_curvatures(
     Eigen::MatrixXd N;
     igl::per_vertex_normals( V, F, N );
     
-    Eigen::MatrixXi E;
-    edges( F, E );
-
     K1 = Eigen::VectorXd::Zero(V.rows());
     K2 = Eigen::VectorXd::Zero(V.rows());
     D1 = Eigen::MatrixXd::Zero(V.rows(),3);
@@ -34,11 +31,6 @@ void principal_curvatures(
     Eigen::SparseMatrix< double > Madj;
     igl::adjacency_matrix( F, Madj );
     
-    //std::cout << "Madj is: " << Madj.rows() << "x" << Madj.cols() << std::endl
-    //std::cout << "Adjacency Matrix looks like: " << std::endl << Madj << std::endl;
-    //std::cout << "Just finised Adjencency matrix dump!" << std::endl;
-    //std::cout << "Madj values are: " << std::endl << *(Madj.valuePtr()) << std::endl;
-
     // for each vertex, 
     // get 2 ring around vertex - results in k points
     // build P^kx3 for that vert
@@ -59,7 +51,6 @@ void principal_curvatures(
             twoRingVerts.insert( it.index() );
         }
 
-        //std::cout << "Have " << oneRingVerts.size() << " one ring verts!" << std::endl;
         // now add the 2-ring verts...
         const int nOneRing = oneRingVerts.size();
         for( int j = 0; j < nOneRing; ++j )
@@ -67,9 +58,6 @@ void principal_curvatures(
             for( Eigen::SparseMatrix<double>::InnerIterator it( Madj, oneRingVerts[j] ); it; ++it )
                 twoRingVerts.insert( it.index() );
         }
-        
-        //std::cout << "Have " << twoRingVerts.size() << " two ring verts!" << std::endl;
-
         
         Eigen::MatrixXd P( twoRingVerts.size(), 3 ); // 2-ring
         int count( 0 );
@@ -82,7 +70,6 @@ void principal_curvatures(
         // Find the eigen vectors and values of P^T * P
         Eigen::Matrix3d PTP = P.transpose() * P;
         Eigen::SelfAdjointEigenSolver< Eigen::Matrix3d > pca( PTP );
-        std::cout << "EIgenvectors from the pca of a are: " << pca.eigenvectors() << std::endl;
         
         Eigen::MatrixXd s( 2, 3 );
         s = pca.eigenvectors().block( 0, 1, 3, 2 ).transpose();
@@ -91,13 +78,12 @@ void principal_curvatures(
         // eigenvalues give our height above the surface, B
         Eigen::RowVector3d w = pca.eigenvectors().col( 0 ).transpose();
 
-        //std::cout << "going to check direction..." << std::endl;
         // check with normals if above/below surface...
         if( N.row( i ) * w.transpose() < 0.0 )
             w = -w;
 
-        std::cout << "building B..." << std::endl;
         Eigen::MatrixXd B =  P * w.transpose();
+
         //
         // Least Squares
         //
@@ -109,6 +95,7 @@ void principal_curvatures(
         //
         // unknowns in columns a_0 through a_4 and use igl::pinv
         // Solve for Ainv given A for our system in P on S (the coefficients).
+        //
         Eigen::MatrixXd A( Ps.rows(), 5 );
         Eigen::MatrixXd Ainv; // A^-1
         A.col( 0 ) = Ps.col( 0 );                               // a_0*u
@@ -117,8 +104,8 @@ void principal_curvatures(
         A.col( 3 ) = Ps.rowwise().prod();                       // a_3*u*v
         A.col( 4 ) = Ps.col( 1 ).array() * Ps.col( 1 ).array(); // a_4*v^2
 
-        std::cout << "calling pinv" << std::endl;
         igl::pinv( A, Ainv );
+
         Eigen::VectorXd Ac = Ainv * B;
 
         // Assemble our Shape operator...osculating jets are interesting....
@@ -148,12 +135,7 @@ void principal_curvatures(
 
         Eigen::Vector2d principalCurvatures = pca_on_S.eigenvalues();
 
-        //std::cout << "eigen vectors make the dirs" << std::endl;
         Eigen::Matrix< double, 2, 3 > principalDirs = ( s.transpose() * pca_on_S.eigenvectors() ).transpose();
-
-
-        //std::cout << "copying the values" << std::endl;
-        //std::cout << "principalCurvatures are " << std::endl << principalCurvatures << std::endl;
 
         // distinguish between min and max components...
         int min( 0 ), max( 1 );
@@ -166,12 +148,7 @@ void principal_curvatures(
         K1( i ) = principalCurvatures( min );
         K2( i ) = principalCurvatures( max );
 
-        //std::cout << "copying the directions...." << std::endl;
-        //std::cout << "principalDirs is " << std::endl << principalDirs << std::endl;
-
         D1.row( i ) = principalDirs.row( min );
         D2.row( i ) = principalDirs.row( max );
-
-        //std::cout << "done with vert " << i << std::endl;
     }
 }

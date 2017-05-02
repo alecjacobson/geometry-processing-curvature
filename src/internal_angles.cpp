@@ -6,11 +6,10 @@ void internal_angles(
   const Eigen::MatrixXd & l_sqr,
   Eigen::MatrixXd & A)
 {
-    //std::cout << "l_sqr is: "<< std::endl<< l_sqr << std::endl;
     // Given
     // a^2 = b^2 + c^2 - 2*bc*cos(alpha)
     // alpha = acos( ( a^2 - b^2 - c^2 ) ) / -2*bc )
-
+    //
     const int n = l_sqr.rows();
     A.resize( n, 3 );
 
@@ -28,7 +27,4 @@ void internal_angles(
             A( i, j ) = alpha;
         }
     }
-
-    //std::cout << "A is: "<< std::endl<< A << std::endl;
-    
 }
