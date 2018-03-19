@@ -6,6 +6,7 @@ void internal_angles(
 {
   A.resize(l_sqr.rows(), l_sqr.cols());
 
+  #pragma omp parallel for
   for(int i = 0; i < A.rows(); i++) {
     for(int j = 0; j < 3; j++) {
       double a2 = l_sqr(i, (j + 1) % 3);

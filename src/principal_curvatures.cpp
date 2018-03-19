@@ -25,6 +25,7 @@ void principal_curvatures(
   igl::per_vertex_normals(V, F, N);
 
   // There's probably a more elegant way to do this whole thing but I'm tired
+  #pragma omp parallel for
   for(int i = 0; i < V.rows(); i++) {
     // Get two-ring of v
     std::set<int> two_ring;
@@ -44,8 +45,8 @@ void principal_curvatures(
     }
 
     // Compute tangent plane
-    Eigen::JacobiSVD<Eigen::MatrixXd> PTPsvd(P.transpose() * P, Eigen::ComputeFullU);
-    Eigen::MatrixXd R = PTPsvd.matrixU();
+    Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> PTPeig(P.transpose() * P);
+    Eigen::MatrixXd R = PTPeig.eigenvectors().rowwise().reverse();
     Eigen::MatrixXd PR = P * R;
     Eigen::MatrixXd S = PR.leftCols(2);
     Eigen::VectorXd B = PR.rightCols(1);
