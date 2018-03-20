@@ -8,11 +8,9 @@ void mean_curvature(
   const Eigen::MatrixXi & F,
   Eigen::VectorXd & H)
 {
-	std::cout << "test" << std::endl;
 	Eigen::SparseMatrix<double> L; 
 	igl::cotmatrix(V, F, L);
 	Eigen::SparseMatrix<double> M;
 	igl::massmatrix(V, F, igl::MASSMATRIX_TYPE_BARYCENTRIC, M);
 	H = (M.cwiseInverse() * L * V).rowwise().squaredNorm();
-	std::cout << "test2" << std::endl;
 }
