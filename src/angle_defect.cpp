@@ -18,9 +18,11 @@ void angle_defect(
   for (int i = 0; i < F.rows(); i++){
   	for (int j = 0; j < F.cols(); j++){
   	  int index = F(i, j);
+  	  //Sum up all internal angle at current vectex
   	  angle_sum(index, 0) += A(i, j);
   	}
   }
+  //2pi - sum
   D = (2 * M_PI - angle_sum.array());
 
 }

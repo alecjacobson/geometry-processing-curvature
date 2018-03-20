@@ -33,11 +33,16 @@ void mean_curvature(
 
   Eigen::MatrixXd N;
   H.resize(V.rows(), 1);
+  //Find the normals
   igl::per_vertex_normals(V, F, N);
+  //This is magnitude
   auto mag = (mean_normal.array() * mean_normal.array()).rowwise().sum().sqrt();
+  //Use dot product of mean normal and normal to see if they agree or not
   auto sign =  (mean_normal.array() * N.array()).rowwise().sum().unaryExpr(std::ptr_fun(sign_func));
+  //Apply sign to mag
   H = (mag.array() * sign.array()).matrix();
-  
+
+  ////Old for loop, works but less efficient
   // for (int i = 0; i < mean_normal.rows(); i++){
   // 	auto row = mean_normal.row(i);
   // 	auto dotprod = N.row(i).dot(row);
