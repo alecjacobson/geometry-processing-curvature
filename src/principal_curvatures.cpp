@@ -92,7 +92,6 @@ void principal_curvatures(
 		small << e, f, f, g;
 		big << E, F, F, G;
 		Eigen::MatrixXd SO = -small*(big.inverse());
-
 		
 		// Decomposition of S to get principal curvatures and principal tangent directions
 		Eigen::SelfAdjointEigenSolver<Eigen::Matrix2d> dcp(SO);

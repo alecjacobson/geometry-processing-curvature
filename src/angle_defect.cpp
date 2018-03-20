@@ -8,7 +8,6 @@ void angle_defect(
   const Eigen::MatrixXi & F,
   Eigen::VectorXd & D)
 {
-	D = Eigen::VectorXd::Zero(V.rows());
 	// Calculate internal angles
 	Eigen::MatrixXd l_sqr;
 	igl::squared_edge_lengths(V, F, l_sqr);
