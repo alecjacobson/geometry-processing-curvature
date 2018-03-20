@@ -16,7 +16,7 @@ void internal_angles(
       // acos is in radians
       A(f_idx, i) = acos(
                     (b_squared + c_squared - a_squared)
-                    / (2 * sqrt(c_squared) * sqrt(a_squared)));
+                    / (2 * sqrt(c_squared) * sqrt(b_squared)));
     }
   }
 }
