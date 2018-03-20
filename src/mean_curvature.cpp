@@ -37,7 +37,7 @@ void mean_curvature(
   auto mag = (mean_normal.array() * mean_normal.array()).rowwise().sum().sqrt();
   auto sign =  (mean_normal.array() * N.array()).rowwise().sum().unaryExpr(std::ptr_fun(sign_func));
   H = (mag.array() * sign.array()).matrix();
-
+  
   // for (int i = 0; i < mean_normal.rows(); i++){
   // 	auto row = mean_normal.row(i);
   // 	auto dotprod = N.row(i).dot(row);
