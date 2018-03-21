@@ -2,10 +2,11 @@
 #include <Eigen/SVD>
 #include <Eigen/Eigenvalues>
 #include <igl/adjacency_matrix.h>
+#include <igl/per_vertex_normals.h>
 #include <igl/pinv.h>
 #include <vector>
 #include <cmath>
-#include <iostream>
+#include <iostream> 
 void principal_curvatures(
   const Eigen::MatrixXd & V,
   const Eigen::MatrixXi & F,
@@ -22,6 +23,8 @@ void principal_curvatures(
 
   Eigen::SparseMatrix<int> adjacency;
   igl::adjacency_matrix(F, adjacency);
+  Eigen::MatrixXd N;
+  igl::per_vertex_normals(V, F, N);
   for (int i = 0; i < V.rows() ; i ++){
     Eigen::VectorXd v_pos = V.row(i);
     //construct two ring
@@ -48,9 +51,11 @@ void principal_curvatures(
     Eigen::JacobiSVD<Eigen::MatrixXd> svd(P, Eigen::ComputeThinU|Eigen::ComputeThinV);
     auto score = svd.matrixU() * svd.singularValues().asDiagonal();
 
-    Eigen::MatrixXd u = score.col(0);
-    Eigen::MatrixXd v = score.col(1);
-    Eigen::MatrixXd w = score.col(2);
+    Eigen::VectorXd u = score.col(0);
+    Eigen::VectorXd v = score.col(1);
+    Eigen::VectorXd w = score.col(2);
+    //Forces the height field to follow the normal direction
+    if (svd.matrixV().col(2).dot(N.row(i)) < 0) w = -w;
 
     Eigen::MatrixXd to_solve(list_of_p.size(), 5);
     to_solve.col(0) = u;
@@ -95,8 +100,8 @@ void principal_curvatures(
 
     //transfer back to world
     Eigen::MatrixXd base = svd.matrixV().leftCols(2);
-    D1.row(i) = eig.eigenvectors().row(k1) * base.transpose();
-    D2.row(i) = eig.eigenvectors().row(k2) * base.transpose();
+    D1.row(i) = eig.eigenvectors().col(k1).transpose() * base.transpose();
+    D2.row(i) = eig.eigenvectors().col(k2).transpose() * base.transpose();
 
   }
 
