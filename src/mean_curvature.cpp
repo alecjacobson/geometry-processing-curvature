@@ -39,7 +39,8 @@ void mean_curvature(
   auto mag = (mean_normal.array() * mean_normal.array()).rowwise().sum().sqrt();
   //Use dot product of mean normal and normal to see if they agree or not
   auto sign =  (mean_normal.array() * N.array()).rowwise().sum().unaryExpr(std::ptr_fun(sign_func));
-  //Apply sign to mag
+  //Apply sign to mag 
+  //Don't why I need this minus here, I just add this so the other method and this agrees.
   H = -(mag.array() * sign.array()).matrix();
 
   ////Old for loop, works but less efficient
