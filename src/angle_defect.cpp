@@ -1,6 +1,9 @@
 #include "../include/angle_defect.h"
+#include "../include/internal_angles.h"
 #include "igl/squared_edge_lengths.h"
 #include <math.h>
+#include <iostream>
+using namespace std;
 
 void angle_defect(
   const Eigen::MatrixXd & V,
@@ -8,40 +11,27 @@ void angle_defect(
   Eigen::VectorXd & D)
 {
   D = Eigen::VectorXd::Zero(V.rows());
-    Eigen::MatrixXd L;
+    Eigen::MatrixXd L, IntAngs;
     L.resizeLike(V);
-    
     igl::squared_edge_lengths(V,F, L);
     
+    internal_angles(L,IntAngs);
     int numF = F.rows();
     int numV = F.maxCoeff() + 1;
-    
-    Eigen::MatrixXd vals(3,2);
-    
-    //Makes it easier to reference other vertices
-    vals(0,0) = 1;
-    vals(0,1) = 2;
-    vals(1,0) = 0;
-    vals(1,1) = 2;
-    vals(2,0) = 0;
-    vals(2,1) = 1;
-    
+        
     double cosAng;
-    for (int curV = 0; curV < numV; curV ++) {
+    /*for (int curV = 0; curV < numV; curV ++) {
         D(curV) = 2.0 * M_PI;
-    }
+    }*/
 
     for (int curF = 0; curF < numF; curF ++) {
         
-        for (int fNo = 0; fNo < 2; fNo ++){
+        for (int fNo = 0; fNo < 3; fNo ++){
         //Apply cosine law
-            cosAng =L(curF,vals(fNo,0)) + L(curF,vals(fNo,1)) - L(curF,fNo);
-            
-            cosAng = cosAng / (2.0 * sqrt(L(curF,vals(fNo,0)) * L(curF,vals(fNo,1))));
-            
-            D(F(curF,fNo)) -= acos(cosAng);
+            D(F(curF,fNo)) += IntAngs(curF,fNo);
         }
         
     }
-    
+    D.array() = 2.0*M_PI - D.array();
+    cout << D << "\n";
 }
