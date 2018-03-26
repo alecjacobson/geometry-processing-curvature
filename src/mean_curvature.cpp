@@ -24,7 +24,7 @@ void mean_curvature(
 
     
     igl::cotmatrix(V,F,L);
-    igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_BARYCENTRIC,M);
+    igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_VORONOI,M);
     igl::per_vertex_normals(V,F,N);
     igl::invert_diag(M,M_inv);
     
@@ -35,7 +35,7 @@ void mean_curvature(
     for (int normNo = 0; normNo < numV; normNo ++) {
         curSign =Hn.row(normNo).dot(N.row(normNo));
         H(normNo) = Hn.row(normNo).norm();
-        if (curSign < 0) {
+        if (curSign > 0) {
             H(normNo) = -1.0 * H(normNo);
         }
         

@@ -33,5 +33,5 @@ void angle_defect(
         
     }
     D.array() = 2.0*M_PI - D.array();
-    cout << D << "\n";
+    //cout << D << "\n";
 }

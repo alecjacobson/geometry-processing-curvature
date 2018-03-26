@@ -22,10 +22,10 @@ void internal_angles(
     
     double cosAng;    
     for (int curF = 0; curF < numF; curF ++) {
-        cout << "Lengths 0: " << l_sqr(curF,0)*10000 << "\n";
+        /*cout << "Lengths 0: " << l_sqr(curF,0)*10000 << "\n";
         cout << "Lengths 1: " << l_sqr(curF,1)*10000 << "\n";
         cout << "Lengths 2: " << l_sqr(curF,2)*10000 << "\n";
-
+         */
         for (int fNo = 0; fNo < 3; fNo ++){
             //Apply cosine law
             cosAng =l_sqr(curF,vals(fNo,0)) + l_sqr(curF,vals(fNo,1)) - l_sqr(curF,fNo);
@@ -35,10 +35,11 @@ void internal_angles(
             A(curF,fNo) = acos(cosAng);
             
         }
+        /*
         cout << (A(curF,0)  + A(curF,1)  + A(curF,2))*180/M_PI << "\n";
         cout << A(curF,0) *180/M_PI << "\n";
         cout << A(curF,1) *180/M_PI << "\n";
-        cout << A(curF,2) *180/M_PI << "\n";
+        cout << A(curF,2) *180/M_PI << "\n";*/
     }
     
 }
