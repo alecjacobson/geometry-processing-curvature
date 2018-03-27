@@ -3,17 +3,19 @@
 #include "igl/cotmatrix.h"
 #include "igl/per_vertex_normals.h"
 #include "igl/invert_diag.h"
-#include <iostream>
-using namespace std;
+
 void mean_curvature(
   const Eigen::MatrixXd & V,
   const Eigen::MatrixXi & F,
   Eigen::VectorXd & H)
 {
-  // Replace with your code
-  H = Eigen::VectorXd::Zero(V.rows());
-    
+
+    //Compute number of vertices
     int numV = F.maxCoeff() + 1;
+    
+    //L is cotangent matrix
+    //M is mass matrix
+    //M_inv is inverted mass matrix
     Eigen::SparseMatrix<double> L, M, M_inv;
     Eigen::MatrixXd N,Hn;
     N.resizeLike(V);
@@ -22,16 +24,17 @@ void mean_curvature(
     M_inv.resize(numV,numV);
     Hn.resizeLike(V);
 
-    
+    //Compute the relevant matrices
     igl::cotmatrix(V,F,L);
     igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_VORONOI,M);
     igl::per_vertex_normals(V,F,N);
     igl::invert_diag(M,M_inv);
     
+    //Integral average
     Hn = M_inv * L * V;
 
     double curSign;
-    //Check consistency with normals.
+    //Check consistency with normals. Mean curvature DISAGREES with normals
     for (int normNo = 0; normNo < numV; normNo ++) {
         curSign =Hn.row(normNo).dot(N.row(normNo));
         H(normNo) = Hn.row(normNo).norm();
