@@ -9,10 +9,10 @@ void mean_curvature(
   const Eigen::MatrixXi & F,
   Eigen::VectorXd & H)
 {
-
+    H = Eigen::VectorXd::Zero(V.rows());
     //Compute number of vertices
     int numV = F.maxCoeff() + 1;
-    
+
     //L is cotangent matrix
     //M is mass matrix
     //M_inv is inverted mass matrix

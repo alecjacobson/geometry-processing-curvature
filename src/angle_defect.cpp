@@ -26,8 +26,7 @@ void angle_defect(
     //Extract number of faces and vertices
     int numF = F.rows();
     int numV = F.maxCoeff() + 1;
-        
-    double cosAng;
+    
 
     //Loop over the faces
     for (int curF = 0; curF < numF; curF ++) {
