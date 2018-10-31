@@ -5,7 +5,7 @@
 #include <igl/read_triangle_mesh.h>
 #include <igl/parula.h>
 #include <igl/doublearea.h>
-#include <igl/viewer/Viewer.h>
+#include <igl/opengl/glfw/Viewer.h>
 #include <Eigen/Core>
 
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
   mean_curvature(V,F,H);
   principal_curvatures(V,F,D1,D2,K1,K2);
 
-  igl::viewer::Viewer viewer;
+  igl::opengl::glfw::Viewer viewer;
   std::cout<<R"(
 S,s      Stretch, squish color axis range
 G        Show Gaussian curvature (using principal_curvatures)
@@ -50,16 +50,16 @@ D,d      Show principal directions
   {
     Eigen::MatrixXd C;
     igl::parula(Z,-scale,scale,C);
-    viewer.data.set_colors(C);
+    viewer.data().set_colors(C);
   };
   viewer.callback_key_pressed = 
-    [&](igl::viewer::Viewer &, unsigned int key, int mod)
+    [&](igl::opengl::glfw::Viewer &, unsigned int key, int mod)
   {
     switch(key)
     {
       case 'D':
       case 'd':
-        viewer.core.show_overlay ^= 1;
+        viewer.data().show_overlay ^= 1;
         break;
       case 'G':
         Z = K1.array()*K2.array();
@@ -91,7 +91,7 @@ D,d      Show principal directions
     return true;
   };
 
-  viewer.data.set_mesh(V,F);
+  viewer.data().set_mesh(V,F);
   Eigen::MatrixXd lP(V.rows()*4,3);
   const double h = igl::avg_edge_length(V,F);
   lP << V-0.5*h*D1, V+0.5*h*D1, V-0.5*h*D2, V+0.5*h*D2;
@@ -110,12 +110,12 @@ D,d      Show principal directions
     lC.row(         e) = orange;
     lC.row(V.rows()+e) = blue;
   }
-  viewer.data.set_edges(lP,lE,lC);
+  viewer.data().set_edges(lP,lE,lC);
 
   update();
-  viewer.core.show_lines = false;
-  viewer.core.show_overlay = false;
-  viewer.data.face_based = false;
+  viewer.data().show_lines = false;
+  viewer.data().show_overlay = false;
+  viewer.data().face_based = false;
   viewer.launch();
   return EXIT_SUCCESS;
 }
