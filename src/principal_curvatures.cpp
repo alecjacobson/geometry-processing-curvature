@@ -4,6 +4,8 @@
 #include <igl/polar_svd.h>
 #include <igl/pinv.h>
 #include <cmath>
+#include <Eigen/Eigenvalues> 
+
 
 void compute_shape_operator(double a1, double a2, double a3, double a4, double a5, Eigen::Matrix2d & S);
 
@@ -65,7 +67,7 @@ void principal_curvatures(
     int counter = 0;
     for (int vertex : neighbors) {
       P.row(counter) = V.row(vertex) - V.row(i);
-      counter += 1;
+      counter +=1;
     }
 
   // compute the PCA of P'P
@@ -80,7 +82,6 @@ void principal_curvatures(
 
   Eigen::MatrixXd P_corr = P.transpose()*P;
 
-  // get the canonical rotation as the U in SVD i.e. SVD(A'A) = UDU'
   igl::polar_svd(P_corr, R_dummy, T_dummy, U, S, V_dummy);
 
   // identify u, v, w based on singular values in S
@@ -154,19 +155,17 @@ void principal_curvatures(
 
 
   // eigen decompose the Shape matrix!
-  // the shape matrix is symmetric. so can do SVD to get the eigen decomposition.
-  // dummy matrices for input to polar_svd
-  Eigen::MatrixXd R_dummy_2, T_dummy_2, V_dummy_2;
 
   // singluar values
-  Eigen::VectorXd Shape_eigenvals;
+  Eigen::Vector2d Shape_eigenvals;
 
   // eigen vectors
-  Eigen::MatrixXd Shape_eigenvectors;
+  Eigen::Matrix2d Shape_eigenvectors;
 
-  // get the canonical rotation as the U in SVD i.e. SVD(A'A) = UDU'
-  igl::polar_svd(Shape_matrix, R_dummy_2, T_dummy_2, Shape_eigenvectors, Shape_eigenvals, V_dummy_2);
-
+  // Shape matrix would be symmetric so can use self-adjoint solver.
+  Eigen::SelfAdjointEigenSolver<Eigen::Matrix2d> solver1(Shape_matrix);
+  Shape_eigenvals = solver1.eigenvalues();
+  Shape_eigenvectors = solver1.eigenvectors();
 
   // get the max and min curvatures and finish!
 
