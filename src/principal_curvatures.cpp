@@ -36,7 +36,7 @@ void principal_curvatures(
 		P.row(j) = V.row(V_tr[j]) - V.row(i);
 	}	
 
-	// Compute eigenvectors of P * P^T to get principal directions and vectors u, v , w
+	// Compute eigenvectors of P^T * P to get principal directions u, v , w
         Eigen::MatrixXd D = P.transpose() * P;
 	Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> eigensolver(D);
 	Eigen::Vector3d u = eigensolver.eigenvectors().col(2);
