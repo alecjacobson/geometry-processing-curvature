@@ -1,6 +1,11 @@
 #ifndef MEAN_CURVATURE_H
 #define MEAN_CURVATURE_H
 #include <Eigen/Core>
+#include "igl/cotmatrix.h"
+#include "igl/massmatrix.h"
+#include "igl/per_vertex_normals.h"
+#include "igl/invert_diag.h"
+
 // Compute the discrete mean curvature at each vertex of a mesh (`V`,`F`) by
 // taking the signed magnitude of the mean curvature normal as a _pointwise_ or
 // _integral average_ quantity.

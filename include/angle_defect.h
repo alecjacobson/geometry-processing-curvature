@@ -1,6 +1,10 @@
 #ifndef ANGLE_DEFECT_H
 #define ANGLE_DEFECT_H
 #include <Eigen/Core>
+#include "igl/squared_edge_lengths.h"
+
+#include "../include/internal_angles.h"
+
 // Compute the discrete angle defect at each vertex of a triangle mesh
 // (`V`,`F`), that is, the _locally integrated_ discrete Gaussian
 // curvature.
