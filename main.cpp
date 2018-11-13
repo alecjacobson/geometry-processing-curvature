@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
   Eigen::MatrixXi F;
   // Load input meshes
   igl::read_triangle_mesh(
-    (argc>1?argv[1]:"../shared/data/cactus.obj"),V,F);
+    (argc>1?argv[1]:"../../shared/data/cactus.obj"),V,F);
 
   Eigen::SparseMatrix<double> M;
   igl::massmatrix(V,F,igl::MASSMATRIX_TYPE_DEFAULT,M);
