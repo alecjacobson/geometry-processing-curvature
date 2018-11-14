@@ -24,10 +24,10 @@ void mean_curvature(
     Eigen::RowVectorXd n_hat = N_hat.row(i);
     double nn = n.dot(n_hat);
     if (nn > 0) {
-      H[i] = -N_hat.row(i).norm();
+      H[i] = N_hat.row(i).norm();
     }
     else {
-      H[i] = N_hat.row(i).norm();
+      H[i] = -N_hat.row(i).norm();
     }
   }
 }
