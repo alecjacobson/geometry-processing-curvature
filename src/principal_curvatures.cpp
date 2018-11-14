@@ -1,4 +1,6 @@
 #include "../include/principal_curvatures.h"
+#include <cmath>
+#include <igl::adjacency_matrix.h>
 
 void principal_curvatures(
   const Eigen::MatrixXd & V,
@@ -13,4 +15,7 @@ void principal_curvatures(
   K2 = Eigen::VectorXd::Zero(V.rows());
   D1 = Eigen::MatrixXd::Zero(V.rows(),3);
   D2 = Eigen::MatrixXd::Zero(V.rows(),3);
+
+  Eigen::SparseMatrix<int> A;
+  igl::adjacency_matrix(F,A);
 }
