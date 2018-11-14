@@ -2,6 +2,7 @@
 #include <igl/adjacency_matrix.h>
 #include <igl/sort.h>
 #include <igl/pinv.h>
+#include <igl/per_vertex_normals.h>
 
 #include <Eigen/Eigenvalues>
 
@@ -19,20 +20,25 @@ void principal_curvatures(
   D1 = Eigen::MatrixXd::Zero(V.rows(),3);
   D2 = Eigen::MatrixXd::Zero(V.rows(),3);
 
+  // Vertex normals
+  Eigen::MatrixXd N;
+  igl::per_vertex_normals(V, F, N);
+
   // Construct adjacency matrix
   Eigen::SparseMatrix<int> adj;
   igl::adjacency_matrix(F, adj);
 
+  // Useful containers
   std::vector<int> p_candidates;
   std::vector<int> p_sorted;
   std::vector<size_t> dummy;
 
   // loop through each vertex
   for (int i = 0; i < V.rows(); ++i) {
-  // for (int i = 412; i < 413; ++i) {
     // Construct P *************************************************************
 
     p_candidates.clear();
+    p_sorted.clear();
 
     // Inner ring of v
     for (Eigen::SparseMatrix<int>::InnerIterator it(adj, i); it; ++it) {
@@ -48,7 +54,7 @@ void principal_curvatures(
       } // end loop it
     } // end loop ii
 
-    p_sorted.clear();
+    // Sort for purpose of easily identifying duplicates
     igl::sort(p_candidates, true, p_sorted, dummy);
 
     Eigen::MatrixXd P(p_sorted.size(), 3);
@@ -57,39 +63,39 @@ void principal_curvatures(
     ++k;
     for (int ii = 1; ii < p_sorted.size(); ++ii) {
       if (p_sorted[ii] != p_sorted[ii - 1] && p_sorted[ii] != i) {
-      // if (p_sorted[ii] != p_sorted[ii - 1]) {
         P.row(k) = V.row(p_sorted[ii]) - V.row(i);
         ++k;
       }
     } // end loop ii
     P.conservativeResize(k, 3);
 
-    // Fit quadratic *************************************************************
+    // Fit quadratic ************************************************************
     
     // Construct projection
-    Eigen::EigenSolver<Eigen::MatrixXd> solver(P.transpose()*P);
-    Eigen::MatrixXd eig_vec = solver.eigenvectors().real();
-    Eigen::VectorXd eig_val = solver.eigenvalues().real();
+    Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> solver(P.transpose()*P);
+    Eigen::MatrixXd eig_vec = solver.eigenvectors();
+    Eigen::VectorXd eig_val = solver.eigenvalues();
+
+    // Set to be consistent with vertex surface normal
+    if (N.row(i).dot(eig_vec.col(0).transpose()) < 0) {
+      eig_vec *= -1.0;
+    }
     Eigen::MatrixXd proj = P*eig_vec;
 
     // Fit quadratic
-    Eigen::MatrixXd dummy2;
-    Eigen::MatrixXi sort;
-    igl::sort3(eig_val, 1, false, dummy2, sort);
-
     Eigen::MatrixXd U(k, 5);
     for (int ii = 0; ii < k; ++ii) {
-      U(ii,0) = proj(ii,sort(0));
-      U(ii,1) = proj(ii,sort(1));
-      U(ii,2) = proj(ii,sort(0))*proj(ii,sort(0));
-      U(ii,3) = proj(ii,sort(0))*proj(ii,sort(1));
-      U(ii,4) = proj(ii,sort(1))*proj(ii,sort(1));
+      U(ii,0) = proj(ii,2);
+      U(ii,1) = proj(ii,1);
+      U(ii,2) = proj(ii,2)*proj(ii,2);
+      U(ii,3) = proj(ii,2)*proj(ii,1);
+      U(ii,4) = proj(ii,1)*proj(ii,1);
     } // end loop ii
     Eigen::MatrixXd U_pinv;
     igl::pinv(U, U_pinv);
-    Eigen::VectorXd a = U_pinv*proj.col(sort(2));
+    Eigen::VectorXd a = U_pinv*proj.col(0);
 
-    // Construct S *************************************************************
+    // Compute principals *******************************************************
 
     double denom = 1.0/std::sqrt(a(0)*a(0) + 1.0 + a(1)*a(1));
     Eigen::MatrixXd temp1(2,2);
@@ -105,14 +111,20 @@ void principal_curvatures(
     Eigen::MatrixXd S = -temp1*temp2.inverse();
 
     // Eigendecomposition of S
-    Eigen::EigenSolver<Eigen::MatrixXd> solverS(S);
-    Eigen::MatrixXd eig_vecS = solverS.eigenvectors().real();
-    Eigen::VectorXd eig_valS = solverS.eigenvalues().real();
+    Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> solverS(S);
+    Eigen::MatrixXd eig_vecS = solverS.eigenvectors();
+    Eigen::VectorXd eig_valS = solverS.eigenvalues();
 
-    // K1(i) = eig_valS(0) < eig_valS(1) ? eig_valS(0) : eig_valS(1);
-    // K2(i) = eig_valS(0) < eig_valS(1) ? eig_valS(1) : eig_valS(0);
-    K1(i) = eig_valS(0);
-    K2(i) = eig_valS(1);
+    // Set principal curvatures
+    K1(i) = eig_valS(1);
+    K2(i) = eig_valS(0);
+
+    // Lift principal tangent directions back to R3
+    Eigen::MatrixXd lift(3,2);
+    lift.col(0) = eig_vec.col(2);
+    lift.col(1) = eig_vec.col(1);
+    D1.row(i) = (lift*eig_vecS.col(1)).transpose();
+    D2.row(i) = (lift*eig_vecS.col(0)).transpose();
 
   } // end loop i
 }
