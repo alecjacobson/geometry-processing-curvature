@@ -18,7 +18,7 @@ void angle_defect(
   igl::squared_edge_lengths(V, F, edge_lengths);
   internal_angles(edge_lengths, angles);
 
-  // compose sums of incident angles and areas for all vertices
+  // compose sums of incident angles for all vertices
   Eigen::VectorXd incident_angle_sums(V.rows());
   for (int i = 0; i < F.rows(); i++) {
     for (int j = 0; j < 3; j++) {

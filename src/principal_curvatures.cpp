@@ -27,11 +27,11 @@ void principal_curvatures(
   // since we're working with triangle meshes, all length-1 walks are also accessible via length-2 walks
   // so we only need to look at the squared adjacency matrix
   // https://en.wikipedia.org/wiki/Adjacency_matrix#Matrix_powers
-  //adjacency_mat = adjacency_mat * adjacency_mat;
+  adjacency_mat = adjacency_mat * adjacency_mat;
 
   for (int i = 0; i < V.rows(); i++) {
     std::vector<int> plane;
-    Eigen::VectorXd neighbourhood = adjacency_mat.col(i);
+    Eigen::VectorXi neighbourhood = adjacency_mat.col(i);
 
     // find indices of all non-zero entries in current row of adjacency matrix
     for (int j = 0; j < neighbourhood.rows(); j++) {
