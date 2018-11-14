@@ -35,10 +35,10 @@ void mean_curvature(
     double cur = HN.row(i).dot(N.row(i));
     int norm = HN.row(i).norm();
     if (cur > 0) {
-      H(i) = norm;
+      H(i) = -norm;
     } 
     else {
-      H(i) = -norm;
+      H(i) = norm;
     }
   }
 
