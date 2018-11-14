@@ -6,15 +6,6 @@
 #include <igl/pinv.h>
 #include <Eigen/Eigenvalues>
 
-#include <Eigen/SVD>
-#include <Eigen/Eigenvalues>
-#include <igl/adjacency_matrix.h>
-#include <igl/per_vertex_normals.h>
-#include <igl/pinv.h>
-#include <vector>
-#include <cmath>
-#include <iostream> 
-
 void principal_curvatures(
   const Eigen::MatrixXd & V,
   const Eigen::MatrixXi & F,
