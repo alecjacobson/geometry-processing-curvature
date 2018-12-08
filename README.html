@@ -2,14 +2,32 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<link type="text/css" rel="stylesheet" href="shared/css/style.css"/>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
-</script>
-<script type="text/javascript" src="shared/js/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<link type="text/css" rel="stylesheet" href="css/github-markdown.css"/>
+<link rel="stylesheet" href="css/github-markdown.css">
+<style>
+.markdown-body {
+box-sizing: border-box;
+min-width: 200px;
+max-width: 980px;
+margin: 0 auto;
+padding: 45px;
+}
 </head>
 <body>
 
+<pre><code>@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
+}
+</code></pre>
+
+<p></style>
+<article class="markdown-body"></p>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <div style="display:none">
 <span class="math">\(\newcommand{\A}{\mat{A}}\)</span>
 <span class="math">\(\newcommand{\B}{\mat{B}}\)</span>
@@ -58,6 +76,8 @@ MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
 <span class="math">\(\newcommand{\y}{\vec{y}}\)</span>
 <span class="math">\(\newcommand{\z}{\vec{z}}\)</span>
 <span class="math">\(\renewcommand{\v}{\vec{v}}\)</span>
+<!-- https://github.com/mathjax/MathJax/issues/1766 -->
+<span class="math">\(\renewcommand{\hat}[1]{\widehat{#1}}\)</span>
 </div>
 
 <h1 id="geometryprocessing–curvature">Geometry Processing – Curvature</h1>
@@ -405,8 +425,9 @@ states that the normal curvature is a quite simple function of <span class="math
 principle curvatures:</p>
 
 <p><span class="math">\[
-k_\n(φ,\p) = k₁ \cos^2 φ + k₂ \sin^2 φ.
-\]</span></p>
+k_\n(φ,\p) = k₁ \cos^2 φ + k₂ \sin^2 φ,
+\]</span>
+(<a href="https://math.stackexchange.com/a/1783316/35376">proof</a>).</p>
 
 <p>There are two immediate and important consequences:</p>
 
