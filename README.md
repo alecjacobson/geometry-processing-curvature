@@ -323,8 +323,9 @@ states that the normal curvature is a quite simple function of $φ$ and the
 principle curvatures:
 
 \\[
-k_\n(φ,\p) = k₁ \cos^2 φ + k₂ \sin^2 φ.
+k_\n(φ,\p) = k₁ \cos^2 φ + k₂ \sin^2 φ,
 \\]
+([proof](https://math.stackexchange.com/a/1783316/35376)).
 
 There are two immediate and important consequences:
 
