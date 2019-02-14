@@ -308,7 +308,7 @@ k₂(\p) &= \min_φ \ k_\n(φ,\p).
 Collectively, these are referred to as the [principal
 curvatures](https://en.wikipedia.org/wiki/Principal_curvature) and
 correspondingly the angles that maximize and minimize curvature are referred to
-as the principle curvature directions:
+as the principal curvature directions:
 
 \\[
 \begin{align}
@@ -320,7 +320,7 @@ as the principle curvature directions:
 [Euler's
 theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem_(differential_geometry))
 states that the normal curvature is a quite simple function of $φ$ and the
-principle curvatures:
+principal curvatures:
 
 \\[
 k_\n(φ,\p) = k₁ \cos^2 φ + k₂ \sin^2 φ,
