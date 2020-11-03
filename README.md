@@ -1,6 +1,6 @@
 # Geometry Processing – Curvature 
 
-> **To get started:** Fork this repository then issue
+> **To get started:** Clone this repository then issue
 > 
 >     git clone --recursive http://github.com/[username]/geometry-processing-curvature.git
 >
