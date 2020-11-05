@@ -44,8 +44,8 @@ Plane](https://en.wikipedia.org/wiki/Plane_(geometry)) and a
 [immersed](https://en.wikipedia.org/wiki/Immersion_(mathematics)) in $\mathbb{R}^3$ (or
 elsewhere). Unlike curves, surfaces can bend in each direction at any point.
 
-We start our discussion assuming a smooth surface $\mathbf{S}$. We would like to
-categorize points on the surface $\mathbf{p} \in  \mathbf{S}$ in terms of how the surface bends or
+We start our discussion assuming a smooth surface $\mathcal{S}$. We would like to
+categorize points on the surface $\mathbf{p} \in  \mathcal{S}$ in terms of how the surface bends or
 curves locally. 
 
 ### Curvature of planar curves
@@ -131,7 +131,7 @@ Because we chose the arc-length parameterization, the only change to the
 tangent vector ${\gamma}'$ is a change in _direction_ (as opposed to magnitude, since
 $\| {\gamma}'\|  := 1$). This means that the change--as a vector itself--is
 _orthogonal_ to the tangent. In other words, the change in tangent ${\gamma}''$ points
-along the normal direction $\widehat{\mathbf{n}}$:
+along the <a id=curvature-normal>normal direction</a> $\widehat{\mathbf{n}}$:
 
 $$
 {\gamma}'' \cdot  {\gamma}' = 0 \quad \rightarrow  \quad {\gamma}'' \cdot  \widehat{\mathbf{n}} = \pm  {\kappa} \widehat{\mathbf{n}}.
@@ -237,7 +237,7 @@ the discrete case. For a closed polygon the discrete signed angles must sum up
 to a multiple of $2{\pi}$ in order to close up:
 
 $$
-{\sum}_{i=1}^n k_i = 2{\pi} {\tau}.
+\sum\limits_{i=1}^n k_i = 2{\pi} {\tau}.
 $$
 
 
@@ -268,12 +268,12 @@ classify points on a surface based on how it curves in each direction.
 #### Normal curvature
 
 The simplest way to extend the curvature that we defined for planar curves to a
-surface $\mathbf{S}$ is to _slice_ the surface through a given point $\mathbf{p}\in \mathbf{S}$ with a
+surface $\mathcal{S}$ is to _slice_ the surface through a given point $\mathbf{p}\in \mathcal{S}$ with a
 [plane](https://en.wikipedia.org/wiki/Plane_(geometry)) $\mathbf{P}$ that is parallel
 to the [surface normal](https://en.wikipedia.org/wiki/Normal_(geometry))
 $\mathbf{n}(\mathbf{p})$.
 
-The (local) intersection of the surface $\mathbf{S}$ and the plane $\mathbf{P}$ will trace a
+The (local) intersection of the surface $\mathcal{S}$ and the plane $\mathbf{P}$ will trace a
 curve ${\gamma}$, upon which we can immediately use the planar curvature definition
 above. 
 
@@ -286,7 +286,7 @@ an intersecting curve ${\gamma}_{\varphi}$ and thus for every angle ${\varphi}$ 
 [_normal curvature_](https://en.wikipedia.org/wiki/Curvature#Normal_sections):
 
 $$
-k_\mathbf{n}({\varphi},\mathbf{p}) = {\gamma}''_\mathbf{n}(\mathbf{p}).
+k_\mathbf{n}({\varphi},\mathbf{p}) = {\gamma}''_\varphi(\mathbf{p}).
 $$
 
 
@@ -299,7 +299,7 @@ average all possible normal curvatures. This defines the [mean
 curvature](https://en.wikipedia.org/wiki/Mean_curvature):
 
 $$
-H(\mathbf{p}) = \frac{1}{2{\pi}}\int _0^{2{\pi}} k_\mathbf{n}({\varphi},\mathbf{p}) \ d{\varphi}.
+H(\mathbf{p}) = \frac{1}{2{\pi}}\int\limits_0^{2{\pi}} k_\mathbf{n}({\varphi},\mathbf{p}) \ d{\varphi}.
 $$
 
 
@@ -360,7 +360,9 @@ The neck of this cartoon elephant--like a Pringles chip--bends inward in one
 direction (positive $k_{1} > 0$) and outward in the other 
 direction (negative $k_{2} < 0$).
 
-![Maximum $k_{1}$, minimum $k_{2}$,and Gaussian curvature $K = k_{1}k_{2}$](images/cartoon-elephant-principal-and-gaussian-curvature.jpg)
+![](images/cartoon-elephant-principal-and-gaussian-curvature.jpg)
+
+Figure Caption: Maximum $k_{1}$, minimum $k_{2}$, and Gaussian curvature $K = k_{1}k_{2}$.
 
 The _product_ of the principal curvatures maintains the disagreement in sign
 that categories this saddle-like behavior. This product is called [Gaussian
@@ -379,35 +381,115 @@ area.
 ##### Mean Curvature as area gradient
 
 Let us consider a seemingly unrelated yet familiar problem. Suppose we would
-like to minimize the surface area of a given shape $\mathbf{S}$. 
+like to _flow_ a given surface in the direction that shrinks its surface area.
+That is, we would like to move each surface point in the direction that
+minimizes surface area.
 
-If we consider a small patch $A \subset  \mathbf{S}$ centered around some point $\mathbf{p} \in \mathbf{S}$, then
-we can imagine forces at the boundary of the patch $\partial A$ that try to shrink the
-area of the patch. These "surface tension" forces point inward against the
-normal direction of the patch boundary ${\eta}$. Consider the integral effect of
-these forces and apply [divergence
-theorem](https://en.wikipedia.org/wiki/Divergence_theorem) to move the integral
-to the interior of the patch.
+The surface area of $\mathcal{S}$ may be written as an integral of unit density:
 
 $$
-{\oint}_{\partial A} -{\eta} \;ds = {\oint}_{\partial A} \mathbf{n} \times  d\mathbf{x} = \int _A \Delta \mathbf{x} \;dA,
+A(\mathcal{S}) = \int_\mathcal{S} 1\ d\mathbf{x}.
 $$
 
-where $\mathbf{n}$ is the surface normal, $d\mathbf{x}$ is the infinitesimal change in position
-around the boundary of the patch, and $\Delta \mathbf{x} \in  \mathbb{R}^{3}$ computes the
-[Laplacian](https://en.wikipedia.org/wiki/Laplace_operator) of the position
-coordinate functions.
+There are many expressions that $=1$. We can choose an expression that is
+especially easy to work with. Namely, the small change in position over a small
+change in position is a unit vector. 
 
-In the limit as $A$ shrinks around any point on the surface,
-this relationship gives us the intuition that _moving_ the surface in the
-direction $\Delta \mathbf{x}$ will decrease the surface area. 
+$$
+\| \nabla x \| = \left\| \frac{\partial x}{\partial x} \right\| = 1.
+$$
+
+The norm of the gradient is a non-linear function involving square roots, but
+since the magnitude is one then the squared magnitude is also one ($\| \nabla x \|^2
+= 1)$. This allows us to write the surface area as a quadratic function of
+positions and familiarly as the Dirichlet energy:
+
+$$
+A(\mathcal{S}) = \int_\mathcal{S} \| \nabla \mathbf{x} \|^2 \ d\mathbf{x}.
+$$
+
+By abuse of notation we can say that $A(\mathbf{x})$  is a functional (function
+that takes a function as input) and measures the surface area of the surface
+defined by the embedding function $\mathbf{x}$. Now, let's consider the
+[functional derivative](https://en.wikipedia.org/wiki/Functional_derivative) of
+$A$ with respect to $\mathbf{x}$. This special type of derivative can be written
+as:
+
+$$
+\frac{d A}{d \mathbf{x}} = \lim_{\epsilon \rightarrow 0} \frac{A(\mathbf{x}+
+\epsilon \mathbf{y}) - A(\mathbf{x})}{\epsilon} \quad \forall \;
+\mathbf{y}: \Omega \rightarrow \mathbb{R}^3
+$$
+
+where $\mathbf{y}$ is an _arbitrary_ function. That is, we consider the limit of
+a tiny perturbation of the function in any way.
+
+We can identify this limit by considering the derivative of the perturbation
+magnitude $\epsilon$ evaluated at zero:
+
+$$
+\frac{d A}{d \mathbf{x}} = \left[ \frac{d}{d \epsilon} A(\mathbf{x}+\epsilon
+\mathbf{y}) \right]_{\epsilon=0} \quad \forall \; \mathbf{y}.
+$$
+
+Feeding in our Dirichlet energy definition of $A(\mathbf{x})$ we can start
+working through this derivative:
+
+
+\begin{align}
+\frac{d A}{d \mathbf{x}} = & 
+\left[ \frac{d}{d \epsilon}
+\int_\mathcal{S} \| \nabla \mathbf{x} + \epsilon \nabla \mathbf{y} \|^2 \ d\mathbf{x}
+\right]_{\epsilon=0} \\ 
+& 
+\left[ \frac{d}{d \epsilon}
+\int_\mathcal{S} \| \nabla \mathbf{x} \|^2 + 2 \epsilon \nabla \mathbf{y} \cdot \nabla \mathbf{x} +  \epsilon^2 \| \nabla \mathbf{y} \|^2 \ d\mathbf{x}
+\right]_{\epsilon=0} \\
+& 
+\left[
+\int_\mathcal{S}  2 \nabla \mathbf{y} \cdot \nabla \mathbf{x} +  2 \epsilon \| \nabla \mathbf{y} \|^2 \ d\mathbf{x}
+\right]_{\epsilon=0} \\
+& 
+\int_\mathcal{S}  2 \nabla \mathbf{y} \cdot \nabla \mathbf{x}  \ d\mathbf{x}.\\
+\end{align}
+
+Assuming that $\mathcal{S}$ is closed (no boundary), then applying [Green's identity](https://en.wikipedia.org/wiki/Green%27s_identities#Green's_first_identity) leaves us with:
+
+\begin{align}
+\frac{d A}{d \mathbf{x}} = & 
+-\int_\mathcal{S}  \mathbf{y} \Delta \mathbf{x}  \ d\mathbf{x} 
+\quad \forall \;
+\mathbf{y}: \Omega \rightarrow \mathbb{R}^3.
+\end{align}
+
+This still leaves us with an expression of the derivative written as an integral
+involving this arbitrary function $\mathbf{y}$. We would like to have a more
+compact expression to evaluate $\frac{d A}{d \mathbf{x}}$ at some query point
+$\mathbf{u} = (u,v)$ on the surface.
+
+Since this must be true for any choice of perturbation function $\mathbf{y}$, we
+can choose $\mathbf{y}$ to be a function that is $=0$ everywhere on the domain
+except in the region just around $\mathbf{u}$, where $\mathbf{y}$ makes a little
+"bump" maxing out at $\mathbf{y}(\mathbf{u}) = 1$. Since this bump can be made
+arbitrarily skinny, we can argue that $\mathbf{y}$ can be factored out of the
+integral above (if $\mathbf{y}=0$ everywhere except $\mathbf{y}=1$ arbitrarily close to
+$\mathbf{u}$, then the integral just evaluates to $\Delta \mathbf{x}$ at
+$\mathbf{u}$):
+
+
+$$
+\frac{d A}{d \mathbf{x}}(\mathbf{u}) = - 2 \Delta \mathbf{x} (\mathbf{u}).
+$$
+
+This reveals to us that the Laplacian of the embedding function indicates the
+direction and amount that the surface should move to decrease surface area.
 
 The Laplacian $\Delta f$ of a function $f$ on the surface does not depend on the
 choice of parameterization. It is defined as the divergence of the gradient of
 the function or equivalently the trace of the Hessian:
 
 $$
-\Delta f = {\nabla}\cdot  {\nabla}f = \tr{ 
+\Delta f = {\nabla}\cdot  {\nabla}f = \newcommand{\tr}[1]{\mathop{\text{tr}}\left(#1\right)}\tr{ 
 \left[ 
 \begin{array}{cc}
 \frac{\partial ^{2}f}{\partial u^{2}} & \frac{\partial ^{2}f}{\partial u\partial v} \\
@@ -419,11 +501,10 @@ $$
 \frac{\partial ^{2}f}{\partial u^{2}} + \frac{\partial ^{2}f}{\partial v^{2}}.
 $$
 
-
 If we generously choose $u$ and $v$ to vary in the principal directions ${\varphi}_{1}$
 and ${\varphi}_{2}$ above. In this case, the Laplacian $\Delta \mathbf{x}$ of the position function
-reduces to the sum of principal curvatures times the normal (recall Equation
-$(\ref{equ:curvature-normal})$):
+reduces to the sum of principal curvatures times the normal (recall the
+definition of [curvature normal](#curvature-normal)):
 
 \begin{align*}
 \Delta \mathbf{x} &= \frac{\partial ^{2}\mathbf{x}}{\partial u^{2}} + \frac{\partial ^{2}\mathbf{x}}{\partial v^{2}} \\
@@ -433,24 +514,7 @@ $(\ref{equ:curvature-normal})$):
 
 where $H\mathbf{n} \in  \mathbb{R}^{3}$ is called the _**mean curvature normal**_ vector. We have
 shown that the mean curvature normal is equal half the Laplacian of the
-embedding function.
-
-<!--
-This turns out to be surprisingly complicated to derive without "going of the
-deep end" into differential forms etc.
-
-The trivial definition of surface area as an integral over $\mathbf{S}$
-becomes an integral over ${\Omega}$ of the determinant of the
-[Jacobian](https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant) of
-$\mathbf{x}$ after applying [substitution
-rule](https://en.wikipedia.org/wiki/Integration_by_substitution):
-
-$$
-\int _\mathbf{S} 1\ dA = \int _{\Omega} \left| {\nabla}\mathbf{x} \right| d{\Omega}
-$$
-
-
--->
+embedding function, which is in turn the gradient of surface area.
 
 ##### Gaussian Curvature as area distortion
 
@@ -467,17 +531,16 @@ Locally, Gaussian curvature measures how far from developable the surface is:
 how much would the local area need to stretch to become flat.
 
 First, we introduce the [Gauss map](https://en.wikipedia.org/wiki/Gauss_map), a
-continuous map $N:\mathbf{S}\rightarrow S^{2}$ from every point $\mathbf{p}$ on the surface $\mathbf{S}$ to the unit
+continuous map $N:\mathcal{S}\rightarrow S^{2}$ from every point $\mathbf{p}$ on the surface $\mathcal{S}$ to the unit
 sphere $S^{2}$ so that $N(\mathbf{p}) := \mathbf{n}(\mathbf{p})$, the unit normal at $\mathbf{p}$.
 
 Consider a small patch on a curved surface. Gaussian curvature $K$ can
 equivalently be defined as the limit of the ratio between the area
-area _swept_ out by the unit normal on the Gauss map $A_G$ and 
+area _swept_ out by the unit normal on the <a id=gauss-map>Gauss map</a> $A_G$ and 
 the area of the surface patch $A$:
 
 $$
 K = \lim_{A\rightarrow 0} \frac{A_G}{A}.
-\label{equ:gaussian-curvature-area}
 $$
 
 
@@ -497,16 +560,16 @@ Let's consider different types of regions:
 
 Similar to the turning number theorem for curves, there exists an analogous
 [theorem for surfaces](https://en.wikipedia.org/wiki/Gauss-Bonnet_theorem)
-stating that the total Gaussian curvature must be an integer multiple of $2{\pi}$:
+stating that the <a id=gauss-bonnet>total Gaussian curvature</a> must be an integer multiple of $2{\pi}$:
 
 $$
-\int _S K dA = 2{\pi} {\chi}(\mathbf{S}),
+\int_S K dA = 2{\pi} {\chi}(\mathcal{S}),
 \label{equ:gauss-bonnet}
 $$
 
-where ${\chi}(\mathbf{S})$ is the [Euler
+where ${\chi}(\mathcal{S})$ is the [Euler
 characteristic](https://en.wikipedia.org/wiki/Euler_characteristic) of the
-surfaces $\mathbf{S}$ (a topological _invariant_ of the surface revealing how many
+surfaces $\mathcal{S}$ (a topological _invariant_ of the surface revealing how many
 [holes](https://en.wikipedia.org/wiki/Genus_(mathematics)) the surface has).
 
 In stark contrast to mean curvature, this theorem tells us that we cannot add
@@ -524,7 +587,7 @@ flat on the ground.
 #### Shape operator
 
 There is yet another way to arrive at principal, mean and Gaussian curvatures.
-Consider a point $\mathbf{p}$ on a surface $\mathbf{S}$ with unit normal vector $\mathbf{n}$. If we
+Consider a point $\mathbf{p}$ on a surface $\mathcal{S}$ with unit normal vector $\mathbf{n}$. If we
 pick a unit tangent vector $\mathbf{v}$ (i.e., so that $\mathbf{v} \cdot  \mathbf{n} = 0$), then we can ask
 how does the normal $\mathbf{n}$ change as we move in the direction of $\mathbf{v}$ along the
 surface:
@@ -535,7 +598,7 @@ $$
 
 we call $S_\mathbf{p}$ the [_**shape
 operator**_](https://en.wikipedia.org/wiki/Differential_geometry_of_surfaces#Shape_operator)
-at the point $\mathbf{p}$. Just as how in Equation $(\ref{equ:curvature-normal})$ the
+at the point $\mathbf{p}$. Just as how in the definition of [curvature normal](#curvature-normal), the
 curvature normal must point in the normal direction, the shape operator takes
 as input a tangent vector and outputs another tangent vector (i.e., the change
 in the unit normal must be tangential to the surface; no change can occur in
@@ -595,24 +658,20 @@ a plane aligned with the chosen direction. Given two orthonormal tangent
 directions $\mathbf{u}$ and $\mathbf{v}$ (i.e., a local parameterization), let's collect the
 normal curvature normal vectors:
 
-$$
 \begin{align}
 k_\mathbf{n}(\mathbf{u},\mathbf{p})\mathbf{n} &= {\gamma}''_\mathbf{u}(\mathbf{p}) \\
 k_\mathbf{n}(\mathbf{v},\mathbf{p})\mathbf{n} &= {\gamma}''_\mathbf{v}(\mathbf{p}).
 \end{align}
-$$
 
 
 If instead we equivalent consider the _change in normal vector_ for each sliced
 curve, our curvature vectors will live in the orthogonal space: the tangent
 space. 
 
-$$
 \begin{align}
 k_\mathbf{n}(\mathbf{u},\mathbf{p})\mathbf{v} &= {\gamma}''_\mathbf{u}(\mathbf{p}) \\
 k_\mathbf{n}(\mathbf{v},\mathbf{p})\mathbf{u} &= {\gamma}''_\mathbf{v}(\mathbf{p}).
 \end{align}
-$$
 
 
 > Before we chose the normal direction by an angle ${\varphi}$, but for any tangent
@@ -661,8 +720,8 @@ chain of faces connected by edges so long as it doesn't form a loop or contain
 all faces incident on a vertex. This hints that discrete Gaussian curvature
 (like curvature for curves) must live at vertices.
 
-Using the definition of Gaussian curvature in terms of the area on the Gauss
-map in Equation $(\ref{equ:gaussian-curvature-area})$: flat faces correspond
+Using the definition of Gaussian curvature in terms of the area on the [Gauss
+map](#gauss-map), flat faces correspond
 points on the Gauss map (contributing nothing), edges correspond to area-less
 curves (traced by their [dihedral
 angles](https://en.wikipedia.org/wiki/Dihedral_angle)), but vertices correspond
@@ -675,7 +734,7 @@ internal angles ${\theta}_f$ incident on the $i$-th vertex contributed by each $
 incident face:
 
 $$
-{\Omega}_i = 2{\pi} - {\sum}\limits_{f \in  \text{faces(i)}} {\theta}_{if}.
+{\Omega}_i = 2{\pi} - \sum\limits_{f \in  \text{faces(i)}} {\theta}_{if}.
 $$
 
 
@@ -688,17 +747,17 @@ _pointwise_) discrete Gaussian curvature is the angle defect divided by the
 local area associated with the $i$-th vertex:
 
 $$
-K_i = \frac{2{\pi} - {\sum}\limits_{f \in  \text{faces(i)}} {\theta}_{if}}{A_i}.
+K_i = \frac{2{\pi} - \sum\limits_{f \in  \text{faces(i)}} {\theta}_{if}}{A_i}.
 $$
 
 
 By way of closing up the Gauss map, closed polyhedral surfaces (i.e., meshes)
 will obey the
-[Gauss-Bonnet](https://en.wikipedia.org/wiki/Gauss-Bonnet_theorem) in Equation 
-$(\ref{equ:gauss-bonnet})$, too:
+[Gauss-Bonnet](https://en.wikipedia.org/wiki/Gauss-Bonnet_theorem)
+[above](#gauss-bonnet), too:
 
 $$
-{\sum}\limits_{i=1}^n K_i = 2{\pi} {\chi}(\mathbf{S}).
+\sum\limits_{i=1}^n K_i = 2{\pi} {\chi}(\mathcal{S}).
 $$
 
 
@@ -707,7 +766,7 @@ formula](https://en.wikipedia.org/wiki/Euler_characteristic) for polyhedra in ou
 assignment:
 
 $$
-\frac{1}{2{\pi}} {\sum}\limits_{i=1}^n K_i =  |V| - |E| + |F|,
+\frac{1}{2{\pi}} \sum\limits_{i=1}^n K_i =  |V| - |E| + |F|,
 $$
 
 where $|V|, |E|, |F|$ are the number of vertices, edges and faces respectively.
@@ -734,7 +793,7 @@ Thus, the algorithm proceeds as follows. For each vertex $\mathbf{v}$ of the giv
  orthogonal to the normal at $\mathbf{v}$. To find such a plane, compute the
  [principal-component
  analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) of $\mathbf{P}$
- (i.e., conduct eigen decomposition on $\mathbf{P}^{\mathsf T} \mathbf{P}$). Let $\mathbf{S} \in  \mathbb{R}^{k \times 
+ (i.e., conduct eigen decomposition on $\mathbf{P}^{\mathsf T} \mathbf{P}$). Let $\mathcal{S} \in  \mathbb{R}^{k \times 
  2}$ be the coefficients for two most principal directions (call them the $u$-
  and $v$- directions) corresponding to each point in $\mathbf{P}$, and let $\mathbf{B} \in 
  \mathbb{R}^{k}$ be the "height" of each point in the least principal direction (call
@@ -745,13 +804,15 @@ $$
 w = a_{1} u + a_{2} v + a_{3} u^{2} + a_{4}uv + a_{5}v^{2}.
 $$
 
- We have $k$ sets of $u,v$ values and $w$ values. Treat this as a
- least-squares fitting problem and solve for the 5 unknown coefficients.
- (`igl::pinv` is good for solving this robustly).
- 4. Each element of the shape operator for the graph of a quadratic function
- over the plane has a closed form expression. You need to derive these by hand.
- Just kidding. The shape operator can be constructed as the product of two
- matrices:
+We have $k$ sets of $u,v$ values and $w$ values. Treat this as a
+least-squares fitting problem and solve for the 5 unknown coefficients.
+(`igl::pinv` is good for solving this robustly).
+
+4. Each element of the shape operator for the graph of a quadratic function
+over the plane has a closed form expression. You need to derive these by hand.
+Just kidding. The shape operator can be constructed as the product of two
+matrices:
+
 $$
 S = -
 \left[
@@ -781,8 +842,10 @@ $$
 
  See Table 1 of "Estimating Differential Quantities Using Polynomial Fitting of
  Osculating Jets" [Cazals & Pouget 2003] to double check for typos :-).
+
  5. Eigen decomposition of $S$ reveals the principal curvatures $k_{1}$ and $k_{2}$
  _and_ the principal tangent directions (in the $uv$ PCA basis).
+
  6. Lift the principal tangent directions back to world $\mathbb{R}^{3}$ coordinates.
 
 ## Tasks
