@@ -832,11 +832,12 @@ $$
  known as the second and first fundamental forms respectively. The entries of
  these matrices categorize the stretch and bending in each direction:
 $$
-E = 1+a_{1}^{2} \\
-F = a_{1}a_{2}  \\
-G = 1+a_{2}^{2} \\
-e = \frac{2a_{3}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}} \\
-f = \frac{a_{4}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}} \\
+E = 1+a_{1}^{2}, \\
+F = a_{1}a_{2},  \\
+G = 1+a_{2}^{2}, \\
+
+e = \frac{2a_{3}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}}, \\
+f = \frac{a_{4}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}}, \\
 g = \frac{2a_{5}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}}
 $$
 
