@@ -673,7 +673,7 @@ matrices:
 
  known as the second and first fundamental forms respectively. The entries of
  these matrices categorize the stretch and bending in each direction:
-<p align="center"><img src="./tex/b39fb9813d2cf851a8da01b0147c913a.svg?invert_in_darkmode" align=middle width=446.4431631pt height=68.1263319pt/></p>
+<p align="center"><img src="./tex/26a11f8f12a2d5f80196f7b40ccee952.svg?invert_in_darkmode" align=middle width=722.0178999pt height=40.289634pt/></p>
 
  See Table 1 of "Estimating Differential Quantities Using Polynomial Fitting of
  Osculating Jets" [Cazals & Pouget 2003] to double check for typos :-).
