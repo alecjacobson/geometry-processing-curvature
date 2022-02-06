@@ -74,7 +74,7 @@ $$
 It always possible, and often convenient, to assume without loss of generality
 that $s$ is an [arc length
 parameterization](https://en.wikipedia.org/wiki/Arc_length) of the curve ${\gamma}$ so
-that $\|{\gamma}'\| = 1$ and therefor the unit tangent vector is simply $\mathbf{t}(s) =
+that $\|{\gamma}'\| = 1$ and therefore the unit tangent vector is simply $\mathbf{t}(s) =
 {\gamma}'(s)$.
 
 In an analogous fashion, we can consider the limit of the
@@ -215,7 +215,7 @@ loops, etc.
 
 In the discrete world, if a curve is represented as a piecewise-linear chain of
 segments, then it's natural to associate curvature with vertices: the segments
-are flat and therefor contain no curvature.
+are flat and therefore contain no curvature.
 
 A natural analog to the definition of curvature as 
 the derivative of the tangent vector 

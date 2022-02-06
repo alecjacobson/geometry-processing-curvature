@@ -71,7 +71,7 @@ another point on the curve <img src="./tex/bb6c9ad7258cdd805398547a25e53aac.svg?
 It always possible, and often convenient, to assume without loss of generality
 that <img src="./tex/6f9bad7347b91ceebebd3ad7e6f6f2d1.svg?invert_in_darkmode" align=middle width=7.7054801999999905pt height=14.15524440000002pt/> is an [arc length
 parameterization](https://en.wikipedia.org/wiki/Arc_length) of the curve <img src="./tex/193089f7a231633473714830d2edc62a.svg?invert_in_darkmode" align=middle width=9.423880949999988pt height=14.15524440000002pt/> so
-that <img src="./tex/41298c93d4b1388e9d8cf7017938b420.svg?invert_in_darkmode" align=middle width=60.61099604999999pt height=24.7161288pt/> and therefor the unit tangent vector is simply <img src="./tex/5f8e197a7e88cc7cd47d4ed2a8f3ebd4.svg?invert_in_darkmode" align=middle width=84.28675199999999pt height=24.7161288pt/>.
+that <img src="./tex/41298c93d4b1388e9d8cf7017938b420.svg?invert_in_darkmode" align=middle width=60.61099604999999pt height=24.7161288pt/> and therefore the unit tangent vector is simply <img src="./tex/5f8e197a7e88cc7cd47d4ed2a8f3ebd4.svg?invert_in_darkmode" align=middle width=84.28675199999999pt height=24.7161288pt/>.
 
 In an analogous fashion, we can consider the limit of the
 [circumcircle](https://en.wikipedia.org/wiki/Circumscribed_circle)
@@ -191,7 +191,7 @@ loops, etc.
 
 In the discrete world, if a curve is represented as a piecewise-linear chain of
 segments, then it's natural to associate curvature with vertices: the segments
-are flat and therefor contain no curvature.
+are flat and therefore contain no curvature.
 
 A natural analog to the definition of curvature as 
 the derivative of the tangent vector 
