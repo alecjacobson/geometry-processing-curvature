@@ -41,11 +41,11 @@ locally as curvature.
 fundamental difference between a chunk (i.e., subregion) of the [Euclidean
 Plane](https://en.wikipedia.org/wiki/Plane_(geometry)) and a
 [surface](https://en.wikipedia.org/wiki/Surface_(mathematics)) that has been
-[immersed](https://en.wikipedia.org/wiki/Immersion_(mathematics)) in <img src="./tex/d03c1e146df015e061405cc425738d83.svg?invert_in_darkmode" align=middle width=18.424726649999986pt height=26.76175259999998pt/> (or
+[immersed](https://en.wikipedia.org/wiki/Immersion_(mathematics)) in $\mathbb{R}^3$ (or
 elsewhere). Unlike curves, surfaces can bend in each direction at any point.
 
-We start our discussion assuming a smooth surface <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/>. We would like to
-categorize points on the surface <img src="./tex/c70e8b6b19ed8af207e2790273e8e0d5.svg?invert_in_darkmode" align=middle width=41.78054429999999pt height=22.465723500000017pt/> in terms of how the surface bends or
+We start our discussion assuming a smooth surface $\mathcal{S}$. We would like to
+categorize points on the surface $\mathbf{p} \in  \mathcal{S}$ in terms of how the surface bends or
 curves locally. 
 
 ### Curvature of planar curves
@@ -53,55 +53,66 @@ curves locally.
 Let us briefly recall how
 [curvature](https://en.wikipedia.org/wiki/Curvature#Precise_definition) is
 defined for a [planar curve](https://en.wikipedia.org/wiki/Plane_curve)
-<img src="./tex/dd5ee1cd6ae3c66ca44f96af98021ce1.svg?invert_in_darkmode" align=middle width=99.99435929999997pt height=26.76175259999998pt/>.
+${\gamma}:[0,1] \rightarrow  \mathbb{R}^{2}$.
 
 There are multiple equivalent definitions.
 
 #### Osculating circle
 
 We can define the [tangent](https://en.wikipedia.org/wiki/Tangent) direction at
-a point <img src="./tex/a3aa09be6bf777e23fb57a2f3cb00887.svg?invert_in_darkmode" align=middle width=62.334632249999984pt height=24.65753399999998pt/> as the limit of the
-[secant](https://en.wikipedia.org/wiki/Secant_line) formed between <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> and
-another point on the curve <img src="./tex/bb6c9ad7258cdd805398547a25e53aac.svg?invert_in_darkmode" align=middle width=60.040138949999985pt height=24.65753399999998pt/> as <img src="./tex/e73485aa867794d51ccd8725055d03a3.svg?invert_in_darkmode" align=middle width=9.97711604999999pt height=14.611878600000017pt/> approaches <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>:
+a point $\mathbf{p} = {\gamma}(s)$ as the limit of the
+[secant](https://en.wikipedia.org/wiki/Secant_line) formed between $\mathbf{p}$ and
+another point on the curve $\mathbf{q} = {\gamma}(t)$ as $\mathbf{q}$ approaches $\mathbf{p}$:
 
 ![](images/tangent-as-limit-of-secant.gif)
 
-<p align="center"><img src="./tex/c001a1e15253b24d9c5c87222903ca82.svg?invert_in_darkmode" align=middle width=371.54143949999997pt height=38.864210549999996pt/></p>
+$$
+\mathbf{t}(s) = \lim_{\mathbf{q}\rightarrow \mathbf{p}} \frac{\mathbf{q}-\mathbf{p}}{\|\|\mathbf{q}-\mathbf{p}\|\|} = 
+\lim_{t\rightarrow s} \frac{{\gamma}(t)-{\gamma}(s)}{\|\|{\gamma}(t)-{\gamma}(s)\|\|} = \frac{{\gamma}'(s)}{\|\|{\gamma}'(s)\|\|}.
+$$
 
 It always possible, and often convenient, to assume without loss of generality
-that <img src="./tex/6f9bad7347b91ceebebd3ad7e6f6f2d1.svg?invert_in_darkmode" align=middle width=7.7054801999999905pt height=14.15524440000002pt/> is an [arc length
-parameterization](https://en.wikipedia.org/wiki/Arc_length) of the curve <img src="./tex/193089f7a231633473714830d2edc62a.svg?invert_in_darkmode" align=middle width=9.423880949999988pt height=14.15524440000002pt/> so
-that <img src="./tex/41298c93d4b1388e9d8cf7017938b420.svg?invert_in_darkmode" align=middle width=60.61099604999999pt height=24.7161288pt/> and therefor the unit tangent vector is simply <img src="./tex/5f8e197a7e88cc7cd47d4ed2a8f3ebd4.svg?invert_in_darkmode" align=middle width=84.28675199999999pt height=24.7161288pt/>.
+that $s$ is an [arc length
+parameterization](https://en.wikipedia.org/wiki/Arc_length) of the curve ${\gamma}$ so
+that $\|\|{\gamma}'\|\| = 1$ and therefore the unit tangent vector is simply ${\mathbf{t}}(s) = {\gamma}\'(s)$ .
 
 In an analogous fashion, we can consider the limit of the
 [circumcircle](https://en.wikipedia.org/wiki/Circumscribed_circle)
-<img src="./tex/4f92d02acce93762cc7226907c43394f.svg?invert_in_darkmode" align=middle width=85.52721704999998pt height=24.65753399999998pt/> that passes
-through <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> and points <img src="./tex/523c6393dc3eeaf6820cb573577cc8a0.svg?invert_in_darkmode" align=middle width=16.529662049999992pt height=14.611878600000017pt/> and <img src="./tex/2643a8ebedff6c74098a107a85570ec4.svg?invert_in_darkmode" align=middle width=16.529662049999992pt height=14.611878600000017pt/> before and after it on the curve:
+$C(\mathbf{q}\_{1},\mathbf{p},\mathbf{q}\_{2})$ that passes
+through $\mathbf{p}$ and points $\mathbf{q}\_{1}$ and $\mathbf{q}\_{2}$ before and after it on the curve:
 
-<p align="center"><img src="./tex/b368b0d08615562f235f543e4745cbbe.svg?invert_in_darkmode" align=middle width=204.78055949999998pt height=24.4292268pt/></p>
+$$
+C(\mathbf{p}) = \lim_{\mathbf{q}_{1},\mathbf{q}_{2}\rightarrow \mathbf{p}} C(\mathbf{q}_{1},\mathbf{p},\mathbf{q}_{2}).
+$$
 
 
 ![](images/osculating-circle.gif)
 
 This limit circle is called the [osculating
-circle](https://en.wikipedia.org/wiki/Osculating_circle) at the point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> on
-the curve <img src="./tex/193089f7a231633473714830d2edc62a.svg?invert_in_darkmode" align=middle width=9.423880949999988pt height=14.15524440000002pt/>. By construction the tangent of the curve and the circle match at
-<img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>: they're both <img src="./tex/57c545ba93b947836e6461ddd4a3982f.svg?invert_in_darkmode" align=middle width=13.213823699999992pt height=24.7161288pt/>. The
-[radius](https://en.wikipedia.org/wiki/Radius_of_curvature) <img src="./tex/df2505b4579144078667b44d00513974.svg?invert_in_darkmode" align=middle width=35.89613114999999pt height=24.65753399999998pt/> of the
-osculating circle <img src="./tex/cf851d992ef882497c7bb5571aeb402a.svg?invert_in_darkmode" align=middle width=36.21229754999999pt height=24.65753399999998pt/> at the the point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> is proportional to how straight
+circle](https://en.wikipedia.org/wiki/Osculating_circle) at the point $\mathbf{p}$ on
+the curve ${\gamma}$. By construction the tangent of the curve and the circle match at
+$\mathbf{p}$: they're both ${\gamma}'$. The
+[radius](https://en.wikipedia.org/wiki/Radius_of_curvature) $R(\mathbf{p})$ of the
+osculating circle $C(\mathbf{p})$ at the the point $\mathbf{p}$ is proportional to how straight
 the curve is locally: as the curve becomes more and more straight then the
 radius tends toward infinity. This implies that the radius is inversely
 proportional to the "curvy-ness" of the curve. Hence, the inverse of the radius
 is dubbed the curvature:
 
-<p align="center"><img src="./tex/2de026fcd66c43e358680fd2f8a05401.svg?invert_in_darkmode" align=middle width=99.08394704999999pt height=37.099754999999995pt/></p>
+$$
+{\kappa}(\mathbf{p}) = \frac{1}{R(\mathbf{p})}.
+$$
 
 The radius is a non-negative measure of length with units meters, so the
-curvature <img src="./tex/2af59c6d7260c35c9ddd118c6d40f5d9.svg?invert_in_darkmode" align=middle width=9.47111549999999pt height=14.15524440000002pt/> is an non-negative scalar with units 1/meters. The radius of the
+curvature ${\kappa}$ is an non-negative scalar with units 1/meters. The radius of the
 osculating circle can also be written as a limit of the [circumcircle
 radius](https://en.wikipedia.org/wiki/Circumscribed_circle#Cartesian_coordinates_from_cross-_and_dot-products):
 
-<p align="center"><img src="./tex/06eac18ac26c6374d00e5b44f56aa39b.svg?invert_in_darkmode" align=middle width=322.8819033pt height=38.83491479999999pt/></p>
+$$
+R(\mathbf{p}) = \lim_{\mathbf{q}_{1},\mathbf{q}_{2}\rightarrow \mathbf{p}} 
+  \frac{\|\| \mathbf{q}_{1}-\mathbf{p}\|\|  \|\| \mathbf{p}-\mathbf{q}_{2}\|\|  \|\| \mathbf{q}_{2}-\mathbf{q}_{1}\|\| }
+  {2\left| (\mathbf{q}_{1}-\mathbf{p}) \quad (\mathbf{p}-\mathbf{q}_{2})\right|}.
+$$
 
 
 #### Signed curvature
@@ -110,16 +121,21 @@ Plugging in our arc-length parameterization this reveals that the curvature
 (inverse of radius) is equal to the magnitude of change in the tangent or
 equivalently the magnitude of second derivative of the curve:
 
-<p align="center"><img src="./tex/b599230eafe7e17b9040c86efd6ef708.svg?invert_in_darkmode" align=middle width=266.06554919999996pt height=39.452455349999994pt/></p>
+$$
+{\kappa}(s) = \lim_{t\rightarrow s} \left\|\left\| \frac{{\gamma}'(t)-{\gamma}'(s)}{t-s} \right|\right| = \|\| {\gamma}''(s)\|\| .
+$$
 
 
 Because we chose the arc-length parameterization, the only change to the
-tangent vector <img src="./tex/57c545ba93b947836e6461ddd4a3982f.svg?invert_in_darkmode" align=middle width=13.213823699999992pt height=24.7161288pt/> is a change in _direction_ (as opposed to magnitude, since
-<img src="./tex/fc7bc861574810d4b6da99ff1c77f1a2.svg?invert_in_darkmode" align=middle width=65.17721924999998pt height=24.7161288pt/>). This means that the change--as a vector itself--is
-_orthogonal_ to the tangent. In other words, the change in tangent <img src="./tex/387e1fec91a9dec19df1c99c8ecd15bf.svg?invert_in_darkmode" align=middle width=17.003784599999992pt height=24.7161288pt/> points
-along the <a id=curvature-normal>normal direction</a> <img src="./tex/65864fff030088096bc2384e9712668f.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=24.200985600000003pt/>:
+tangent vector ${\gamma}'$ is a change in _direction_ (as opposed to magnitude, since
+$\|\| {\gamma}'\|\|  := 1$). This means that the change--as a vector itself--is
+_orthogonal_ to the tangent. In other words, the change in tangent ${\gamma}''$ points
+along the <a id=curvature-normal>normal direction</a> $\widehat{\mathbf{n}}$:
 
-<p align="center"><img src="./tex/fdb8daaccc56847b848b7a8ce1c2f63f.svg?invert_in_darkmode" align=middle width=231.76014674999996pt height=16.3763325pt/></p>
+$$
+{\gamma}'' \cdot  {\gamma}' = 0 \quad \rightarrow  \quad {\gamma}'' \cdot  \widehat{\mathbf{n}} = \pm  {\kappa} \widehat{\mathbf{n}}.
+\label{equ:curvature-normal}
+$$
 
 
 If we define an orientation to our curve  then we can endow the curvature with
@@ -132,24 +148,27 @@ vector pointing toward the circle's center must be
 i.e., in either the positive or negative
 [normal](https://en.wikipedia.org/wiki/Normal_(geometry)) directions. 
 
-If the orientation agrees with increasing the arc-length parameter <img src="./tex/6f9bad7347b91ceebebd3ad7e6f6f2d1.svg?invert_in_darkmode" align=middle width=7.7054801999999905pt height=14.15524440000002pt/>, then the sign can
+If the orientation agrees with increasing the arc-length parameter $s$, then the sign can
 be 
-determined by comparing the second derivative vector <img src="./tex/387e1fec91a9dec19df1c99c8ecd15bf.svg?invert_in_darkmode" align=middle width=17.003784599999992pt height=24.7161288pt/> to the unit normal
-<img src="./tex/76ec459449f816b5c029cc27353af134.svg?invert_in_darkmode" align=middle width=74.08127264999999pt height=27.91243950000002pt/>. The [_**signed
-curvature**_](https://en.wikipedia.org/wiki/Curvature#Signed_curvature) at a point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> is thus given by:
+determined by comparing the second derivative vector ${\gamma}''$ to the unit normal $\widehat{\mathbf{n}} := ({\gamma}')^{\perp}$. The [_**signed
+curvature**_](https://en.wikipedia.org/wiki/Curvature#Signed_curvature) at a point $\mathbf{p}$ is thus given by:
 
-<p align="center"><img src="./tex/03bdb9a620549fa6bdb44f036303d7e7.svg?invert_in_darkmode" align=middle width=203.5864677pt height=41.9471052pt/></p>
-
+$$
+\begin{align*}
+k(\mathbf{p}) &= \text{sign}({\gamma}''(\mathbf{p})\cdot \widehat{\mathbf{n}}))\ {\kappa}(\mathbf{p})  \\
+      &= {\gamma}''(\mathbf{p}) \cdot  \widehat{\mathbf{n}}.
+\end{align*}
+$$
 
 #### Moving point analogy
 
 This definition neatly conforms to our intuition of a curve as the trajectory
 of a moving point. Imagine the curved formed by driving along a particular
-trajectory <img src="./tex/9f34318b41b902d4f823fe84b7c99d54.svg?invert_in_darkmode" align=middle width=28.14539309999999pt height=24.65753399999998pt/>, where we really interpret <img src="./tex/4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode" align=middle width=5.936097749999991pt height=20.221802699999984pt/> as time.
+trajectory ${\gamma}(t)$, where we really interpret $t$ as time.
 
-While <img src="./tex/ec3c193e6dced0aef0aa4a5f211a09c2.svg?invert_in_darkmode" align=middle width=32.757266849999986pt height=24.7161288pt/> corresponds to your velocity vector and <img src="./tex/8f893124cc00bec18bb594971331a09a.svg?invert_in_darkmode" align=middle width=49.195685549999986pt height=24.7161288pt/> corresponds to
+While ${\gamma}'(t)$ corresponds to your velocity vector and $\|\| {\gamma}'(t)\|\|$ corresponds to
 your speed, the arc-length (re-)parameterization would correspond to having
-your friend re-trace your path traveling at a perfectly uniform speed <img src="./tex/b24cdd55db07f787cd207004056ec33a.svg?invert_in_darkmode" align=middle width=81.10190879999999pt height=24.7161288pt/>, where your friends "time" <img src="./tex/6f9bad7347b91ceebebd3ad7e6f6f2d1.svg?invert_in_darkmode" align=middle width=7.7054801999999905pt height=14.15524440000002pt/> may be different from yours (it may take
+your friend re-trace your path traveling at a perfectly uniform speed $\|\|{\gamma}'(s)\|\| = 1$, where your friends "time" $s$ may be different from yours (it may take
 longer or shorter depending if you drove fast or slow).
 
 Curvature in the path corresponds to _turning_ and quite literally the amount
@@ -161,7 +180,7 @@ constant positive or negative curvature respectively.
 
 Changing the steering wheel changes the _direction_ of the vehicle's velocity.
 For your friend driving at constant speed, this is the _only_ change admissible
-to the velocity, hence the curvature exactly corresponds to <img src="./tex/e9600f89417cea0ec19d927bc0825861.svg?invert_in_darkmode" align=middle width=38.31660689999999pt height=24.7161288pt/> and to the
+to the velocity, hence the curvature exactly corresponds to ${\gamma}''(s)$ and to the
 steering wheel angle.
 
 > If somebody wants to make a Sega [Out
@@ -172,19 +191,21 @@ steering wheel angle.
 
 The integrated signed curvature around a [closed
 curve](https://en.wikipedia.org/wiki/Curve) must be an integer multiple of
-<img src="./tex/a04c31f698b09c6dd0c7687b3514164e.svg?invert_in_darkmode" align=middle width=18.179315549999988pt height=21.18721440000001pt/>:
+$2{\pi}$:
 
-<p align="center"><img src="./tex/439b2ad254f6069803a4745194ef4f14.svg?invert_in_darkmode" align=middle width=120.5422845pt height=36.53007435pt/></p>
+$$
+{\oint} k(s) \ ds = 2{\pi} {\tau},
+$$
 
-where <img src="./tex/0fe1677705e987cac4f589ed600aa6b3.svg?invert_in_darkmode" align=middle width=9.046852649999991pt height=14.15524440000002pt/> is an integer called the "turning number" of the curve. 
+where $\tau$ is an integer called the "turning number" of the curve. 
 
 This is a bit surprising at first glance. However, in the _moving point
 analogy_ a closed curve corresponds to a period trajectory (e.g., driving
 around a race-track). When we've made it once around the track, our velocity
 direction (e.g., the direction the vehicle is facing) must be pointing in the
 original direction. That is, during the course, the car either have turned all the
-way around once (<img src="./tex/2e382d1d2f6b4ef71deca3309c5f80f0.svg?invert_in_darkmode" align=middle width=39.18367364999999pt height=21.18721440000001pt/>) or turned as much clockwise and it did
-counter-clockwise (e.g., on a figure 8 course: <img src="./tex/5caa88446701900327eb3af4dbbf5126.svg?invert_in_darkmode" align=middle width=39.18367364999999pt height=21.18721440000001pt/>), or made multiple
+way around once ( ${\tau} = 1$ ) or turned as much clockwise and it did
+counter-clockwise (e.g., on a figure 8 course: ${\tau}=0$), or made multiple
 loops, etc.
 
 #### Discrete curvature
@@ -195,22 +216,26 @@ are flat and therefor contain no curvature.
 
 A natural analog to the definition of curvature as 
 the derivative of the tangent vector 
-(i.e., <img src="./tex/9f3507bcfeb67b4a30abfddfc3aee597.svg?invert_in_darkmode" align=middle width=115.57658969999997pt height=24.7161288pt/>) is to define _discrete curvature_ as the change in
+(i.e., $k = \|\| {\gamma}''\|\|  = \|\| \mathbf{t}'\|\| $) is to define _discrete curvature_ as the change in
 tangent direction between discrete segments meeting at a vertex:
 
-<p align="center"><img src="./tex/6473c8206b40ed854546bb8298ec8dc6.svg?invert_in_darkmode" align=middle width=263.96728874999997pt height=16.438356pt/></p>
+$$
+k_i =  {\angle} (\mathbf{v}_i - (\mathbf{v}_{i-1}-\mathbf{v}_i)) \mathbf{v}_i\mathbf{v}_{i+1} = {\theta}_i,
+$$
 
 that is, the signed [_exterior
-angle_](https://en.wikipedia.org/wiki/Internal_and_external_angles) <img src="./tex/be9fa78ef5e17dc25159197f21d1e3cb.svg?invert_in_darkmode" align=middle width=12.36779114999999pt height=22.831056599999986pt/> at
-the vertex <img src="./tex/5474c8baa2bc6feabb0eac4237772aab.svg?invert_in_darkmode" align=middle width=14.628015599999989pt height=14.611878600000017pt/>.
+angle_](https://en.wikipedia.org/wiki/Internal_and_external_angles) ${\theta}_i$ at
+the vertex $\mathbf{v}_i$.
 
 ![](images/discrete-curvature.svg)
 
 The turning number theorem for continuous curves finds an _immediate_ analog in
 the discrete case. For a closed polygon the discrete signed angles must sum up
-to a multiple of <img src="./tex/a04c31f698b09c6dd0c7687b3514164e.svg?invert_in_darkmode" align=middle width=18.179315549999988pt height=21.18721440000001pt/> in order to close up:
+to a multiple of $2{\pi}$ in order to close up:
 
-<p align="center"><img src="./tex/2fc5e1035f2a4a687f54647021347724.svg?invert_in_darkmode" align=middle width=93.31141215pt height=44.89738935pt/></p>
+$$
+\sum\limits_{i=1}^n k_i = 2{\pi} {\tau}.
+$$
 
 
 In this way, we _preserve the structure_ found in the continuous case in our
@@ -240,24 +265,26 @@ classify points on a surface based on how it curves in each direction.
 #### Normal curvature
 
 The simplest way to extend the curvature that we defined for planar curves to a
-surface <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> is to _slice_ the surface through a given point <img src="./tex/25932788f3a76f7dc990750a42818296.svg?invert_in_darkmode" align=middle width=41.78054429999999pt height=22.465723500000017pt/> with a
-[plane](https://en.wikipedia.org/wiki/Plane_(geometry)) <img src="./tex/384591906555413c452c93e493b2d4ec.svg?invert_in_darkmode" align=middle width=12.92230829999999pt height=22.55708729999998pt/> that is parallel
+surface $\mathcal{S}$ is to _slice_ the surface through a given point $\mathbf{p}\in \mathcal{S}$ with a
+[plane](https://en.wikipedia.org/wiki/Plane_(geometry)) $\mathbf{P}$ that is parallel
 to the [surface normal](https://en.wikipedia.org/wiki/Normal_(geometry))
-<img src="./tex/9ab0e9039036911be55bc8f0dc28ba8c.svg?invert_in_darkmode" align=middle width=33.78988799999999pt height=24.65753399999998pt/>.
+$\mathbf{n}(\mathbf{p})$.
 
-The (local) intersection of the surface <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> and the plane <img src="./tex/384591906555413c452c93e493b2d4ec.svg?invert_in_darkmode" align=middle width=12.92230829999999pt height=22.55708729999998pt/> will trace a
-curve <img src="./tex/193089f7a231633473714830d2edc62a.svg?invert_in_darkmode" align=middle width=9.423880949999988pt height=14.15524440000002pt/>, upon which we can immediately use the planar curvature definition
+The (local) intersection of the surface $\mathcal{S}$ and the plane $\mathbf{P}$ will trace a
+curve ${\gamma}$, upon which we can immediately use the planar curvature definition
 above. 
 
 ![[Source](http://brickisland.net/cs177fa12/?p=214)](images/normal-curvature.svg)
 
-There are infinitely many planes that pass through a given point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> and lie
-parallel to a given normal vector <img src="./tex/9ab0e9039036911be55bc8f0dc28ba8c.svg?invert_in_darkmode" align=middle width=33.78988799999999pt height=24.65753399999998pt/>: the plane can rotate around the
-normal <img src="./tex/9ab0e9039036911be55bc8f0dc28ba8c.svg?invert_in_darkmode" align=middle width=33.78988799999999pt height=24.65753399999998pt/> by any angle <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/>. For each choice of <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/>, the plane will define
-an intersecting curve <img src="./tex/bbf36b32d259b8e3d56e0ecdee517461.svg?invert_in_darkmode" align=middle width=17.15681219999999pt height=14.15524440000002pt/> and thus for every angle <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/> there will be a
+There are infinitely many planes that pass through a given point $\mathbf{p}$ and lie
+parallel to a given normal vector $\mathbf{n}(\mathbf{p})$: the plane can rotate around the
+normal $\mathbf{n}(\mathbf{p})$ by any angle ${\varphi}$. For each choice of ${\varphi}$, the plane will define
+an intersecting curve ${\gamma}_{\varphi}$ and thus for every angle ${\varphi}$ there will be a
 [_normal curvature_](https://en.wikipedia.org/wiki/Curvature#Normal_sections):
 
-<p align="center"><img src="./tex/40705d85e94dd662b406aa57aab0c3ee.svg?invert_in_darkmode" align=middle width=126.7418394pt height=19.48126455pt/></p>
+$$
+k_\mathbf{n}({\varphi},\mathbf{p}) = {\gamma}''_\varphi(\mathbf{p}).
+$$
 
 
 #### Mean curvature
@@ -268,40 +295,54 @@ surface. A simple way to reduce this space of normal curvatures is to, well,
 average all possible normal curvatures. This defines the [mean
 curvature](https://en.wikipedia.org/wiki/Mean_curvature):
 
-<p align="center"><img src="./tex/07b58c916fbe0f955c5d41ea80eda5e5.svg?invert_in_darkmode" align=middle width=192.59410665pt height=57.388468499999995pt/></p>
+$$
+H(\mathbf{p}) = \frac{1}{2{\pi}}\int\limits_0^{2{\pi}} k_\mathbf{n}({\varphi},\mathbf{p}) \ d{\varphi}.
+$$
 
 
 #### Maximum and minimum curvature 
 
 Another obvious way to reduce the space of normal curvatures to a single number
-is to consider the maximum or minimum normal curvature over all choices of <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/>:
+is to consider the maximum or minimum normal curvature over all choices of ${\varphi}$:
 
-<p align="center"><img src="./tex/5d897003d90cebd14279c85c6bc39422.svg?invert_in_darkmode" align=middle width=160.31188799999998pt height=58.55700015pt/></p>
-
+$$
+\begin{align*}
+k_{1}(\mathbf{p}) &= \max\_{\varphi} \ k_\mathbf{n}({\varphi},\mathbf{p}) \\
+k_{2}(\mathbf{p}) &= \mathop{\text{min}}\_{\varphi} \ k_\mathbf{n}({\varphi},\mathbf{p}).
+\end{align*}
+$$
 
 Collectively, these are referred to as the [principal
 curvatures](https://en.wikipedia.org/wiki/Principal_curvature) and
 correspondingly the angles that maximize and minimize curvature are referred to
 as the principal curvature directions:
 
-<p align="center"><img src="./tex/cd6fb93c75f85ab6cdc57cca14f9b0b7.svg?invert_in_darkmode" align=middle width=185.38421879999999pt height=64.9496892pt/></p>
-
+$$
+\begin{align*}
+{\varphi}\_{1}(\mathbf{p}) &= \mathop{\text{argmax}}\_{\varphi} \ k_\mathbf{n}({\varphi},\mathbf{p}) \\
+{\varphi}\_{2}(\mathbf{p}) &= \mathop{\text{argmin}}\_{\varphi} \ k_\mathbf{n}({\varphi},\mathbf{p}).
+\end{align*}
+$$
 
 [Euler's
 theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem_(differential_geometry))
-states that the normal curvature is a quite simple function of <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/> and the
+states that the normal curvature is a quite simple function of ${\varphi}$ and the
 principal curvatures:
 
-<p align="center"><img src="./tex/d1e44843b9156c97c125ab06c1cfac19.svg?invert_in_darkmode" align=middle width=226.83757964999998pt height=18.439728449999997pt/></p>
+$$
+k_\mathbf{n}({\varphi},\mathbf{p}) = k_{1} \cos^2 {\varphi} + k_{2} \sin^2 {\varphi},
+$$
 
 ([proof](https://math.stackexchange.com/a/1783316/35376)).
 
 There are two immediate and important consequences:
 
- 1. the principal curvature directions (<img src="./tex/67ef67c97ad06a0f412383f1a0f35dd8.svg?invert_in_darkmode" align=middle width=17.30598044999999pt height=14.15524440000002pt/> and <img src="./tex/5fa5023351dd2803361b6b11163f1307.svg?invert_in_darkmode" align=middle width=17.30598044999999pt height=14.15524440000002pt/>) are orthogonal, and 
+ 1. the principal curvature directions ( ${\varphi}\_{1}$ and ${\varphi}\_{2}$ ) are orthogonal, and 
  2. the mean curvature reduces to the average of principal curvatures:
 
-<p align="center"><img src="./tex/bcf370af6bd62035c375d12e082f4248.svg?invert_in_darkmode" align=middle width=118.38951794999998pt height=32.990165999999995pt/></p>
+$$
+H = \frac12 (k_{1} + k_{2}).
+$$
 
 
 > For more theory and a proof of Euler's theorem, I recommend "Elementary
@@ -315,18 +356,20 @@ ball, a flat sheet of paper, the cylindrical Pringles can and a saddle-shaped
 Pringles chip.
 
 The neck of this cartoon elephant--like a Pringles chip--bends inward in one
-direction (positive <img src="./tex/ed6d6e66630f757e45b8b30927d3388c.svg?invert_in_darkmode" align=middle width=46.069176449999986pt height=22.831056599999986pt/>) and outward in the other 
-direction (negative <img src="./tex/bf5d96e517812c3a5e6944e787aa4d5f.svg?invert_in_darkmode" align=middle width=46.069176449999986pt height=22.831056599999986pt/>).
+direction (positive $k_{1} > 0$) and outward in the other 
+direction (negative $k_{2} < 0$).
 
 ![](images/cartoon-elephant-principal-and-gaussian-curvature.jpg)
 
-Figure Caption: Maximum <img src="./tex/df2a706e439b4632680202a540f27fd0.svg?invert_in_darkmode" align=middle width=15.11042279999999pt height=22.831056599999986pt/>, minimum <img src="./tex/bce145d2ce5a01a17e36278910bfa8a4.svg?invert_in_darkmode" align=middle width=15.11042279999999pt height=22.831056599999986pt/>, and Gaussian curvature <img src="./tex/f6fbf53c0380570ad3973fcc160e79c1.svg?invert_in_darkmode" align=middle width=68.09738924999999pt height=22.831056599999986pt/>.
+Figure Caption: Maximum $k_{1}$, minimum $k_{2}$, and Gaussian curvature $K = k_{1}k_{2}$.
 
 The _product_ of the principal curvatures maintains the disagreement in sign
 that categories this saddle-like behavior. This product is called [Gaussian
 curvature](https://en.wikipedia.org/wiki/Gaussian_curvature):
 
-<p align="center"><img src="./tex/1405680900c15675bf1512760b378718.svg?invert_in_darkmode" align=middle width=73.48552695pt height=13.881256950000001pt/></p>
+$$
+K = k_1 k_2.
+$$
 
 
 #### Relationship to surface area
@@ -341,92 +384,143 @@ like to _flow_ a given surface in the direction that shrinks its surface area.
 That is, we would like to move each surface point in the direction that
 minimizes surface area.
 
-The surface area of <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> may be written as an integral of unit density:
+The surface area of $\mathcal{S}$ may be written as an integral of unit density:
 
-<p align="center"><img src="./tex/7d17eec97f22d524cb6b57998b46ef01.svg?invert_in_darkmode" align=middle width=116.62003979999999pt height=37.3519608pt/></p>
+$$
+A(\mathcal{S}) = \int_\mathcal{S} 1\ d\mathbf{x}.
+$$
 
-There are many expressions that <img src="./tex/ef69061d50ca83722ebdd84b564309be.svg?invert_in_darkmode" align=middle width=25.570741349999988pt height=21.18721440000001pt/>. We can choose an expression that is
+There are many expressions that $=1$. We can choose an expression that is
 especially easy to work with. Namely, the small change in position over a small
 change in position is a unit vector. 
 
-<p align="center"><img src="./tex/399e7109457ac92a4d7261ced364c246.svg?invert_in_darkmode" align=middle width=137.39823405pt height=39.452455349999994pt/></p>
+$$
+\|\| \nabla x \|\| = \left\|\left\| \frac{\partial x}{\partial x} \right\|\right\| = 1.
+$$
 
 The norm of the gradient is a non-linear function involving square roots, but
-since the magnitude is one then the squared magnitude is also one (<img src="./tex/a1acfe61ff1d442051fd58db499a07f3.svg?invert_in_darkmode" align=middle width=83.43609614999998pt height=26.76175259999998pt/>. This allows us to write the surface area as a quadratic function of
+since the magnitude is one then the squared magnitude is also one ( $\|\| \nabla x \|\| ^2 = 1$ ). This allows us to write the surface area as a quadratic function of
 positions and familiarly as the Dirichlet energy:
 
-<p align="center"><img src="./tex/4671a2f0a3cba3aaa6464fcdba172528.svg?invert_in_darkmode" align=middle width=155.88949695pt height=37.3519608pt/></p>
+$$
+A(\mathcal{S}) = \int_\mathcal{S} \|\| \nabla \mathbf{x} \|\|^2 \ d\mathbf{x}.
+$$
 
-By abuse of notation we can say that <img src="./tex/4a66353476a6c4397dc61c5f9f3de931.svg?invert_in_darkmode" align=middle width=35.09134859999999pt height=24.65753399999998pt/>  is a functional (function
+By abuse of notation we can say that $A(\mathbf{x})$  is a functional (function
 that takes a function as input) and measures the surface area of the surface
-defined by the embedding function <img src="./tex/b0ea07dc5c00127344a1cad40467b8de.svg?invert_in_darkmode" align=middle width=9.97711604999999pt height=14.611878600000017pt/>. Now, let's consider the
+defined by the embedding function $\mathbf{x}$. Now, let's consider the
 [functional derivative](https://en.wikipedia.org/wiki/Functional_derivative) of
-<img src="./tex/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/> with respect to <img src="./tex/b0ea07dc5c00127344a1cad40467b8de.svg?invert_in_darkmode" align=middle width=9.97711604999999pt height=14.611878600000017pt/>. This special type of derivative can be written
-as:
+$A$ with respect to $\mathbf{x}$. This special type of derivative can be written as:
 
-<p align="center"><img src="./tex/641fc903e350567a0a5e5ff1b3d9d708.svg?invert_in_darkmode" align=middle width=313.8159618pt height=34.7253258pt/></p>
+$$
+\frac{d A}{d \mathbf{x}} = \lim_{\epsilon \rightarrow 0} \frac{A(\mathbf{x}+
+\epsilon \mathbf{y}) - A(\mathbf{x})}{\epsilon} \quad \forall \mathbf{y}: \Omega \rightarrow \mathbb{R}^3
+$$
 
-where <img src="./tex/1da18d2de6d16a18e780cd6c435a2936.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> is an _arbitrary_ function. That is, we consider the limit of
+where $\mathbf{y}$ is an _arbitrary_ function. That is, we consider the limit of
 a tiny perturbation of the function in any way.
 
 We can identify this limit by considering the derivative of the perturbation
-magnitude <img src="./tex/7ccca27b5ccc533a2dd72dc6fa28ed84.svg?invert_in_darkmode" align=middle width=6.672392099999992pt height=14.15524440000002pt/> evaluated at zero:
+magnitude $\epsilon$ evaluated at zero:
 
-<p align="center"><img src="./tex/7c858f145714a0896ea1bc6098f9ddd1.svg?invert_in_darkmode" align=middle width=224.0219718pt height=40.274341799999995pt/></p>
+$$
+\frac{d A}{d \mathbf{x}} = \left[ \frac{d}{d \epsilon} A(\mathbf{x}+\epsilon
+\mathbf{y}) \right]_{\epsilon=0} \quad \forall \mathbf{y}.
+$$
 
-Feeding in our Dirichlet energy definition of <img src="./tex/4a66353476a6c4397dc61c5f9f3de931.svg?invert_in_darkmode" align=middle width=35.09134859999999pt height=24.65753399999998pt/> we can start
+Feeding in our Dirichlet energy definition of $A(\mathbf{x})$ we can start
 working through this derivative:
 
+$$
+\begin{align}
+\frac{d A}{d \mathbf{x}} = & 
+\left[ \frac{d}{d \epsilon}
+\int_\mathcal{S} \| \nabla \mathbf{x} + \epsilon \nabla \mathbf{y} \|^2 \ d\mathbf{x}
+\right]\_{\epsilon=0} \\ 
+& 
+\left[ \frac{d}{d \epsilon}
+\int_\mathcal{S} \| \nabla \mathbf{x} \|^2 + 2 \epsilon \nabla \mathbf{y} \cdot \nabla \mathbf{x} +  \epsilon^2 \| \nabla \mathbf{y} \|^2 \ d\mathbf{x}
+\right]\_{\epsilon=0} \\
+& 
+\left[
+\int_\mathcal{S}  2 \nabla \mathbf{y} \cdot \nabla \mathbf{x} +  2 \epsilon \| \nabla \mathbf{y} \|^2 \ d\mathbf{x}
+\right]\_{\epsilon=0} \\
+& 
+\int_\mathcal{S}  2 \nabla \mathbf{y} \cdot \nabla \mathbf{x}  \ d\mathbf{x}.\\
+\end{align}
+$$
 
-<p align="center"><img src="./tex/8c9f31db42c8c61f5511b8fd4e4b3919.svg?invert_in_darkmode" align=middle width=536.46093435pt height=202.39406879999999pt/></p>
+Assuming that $\mathcal{S}$ is closed (no boundary), then applying [Green's identity](https://en.wikipedia.org/wiki/Green%27s_identities#Green's_first_identity) leaves us with:
 
-Assuming that <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> is closed (no boundary), then applying [Green's identity](https://en.wikipedia.org/wiki/Green%27s_identities#Green's_first_identity) leaves us with:
-
-<p align="center"><img src="./tex/74645fda1ddea0d7479ec78b9d9aab58.svg?invert_in_darkmode" align=middle width=476.73155475pt height=37.51355025pt/></p>
+$$
+\begin{align}
+\frac{d A}{d \mathbf{x}} = & 
+-\int_\mathcal{S}  \mathbf{y} \Delta \mathbf{x}  \ d\mathbf{x} 
+\quad \forall \mathbf{y}: \Omega \rightarrow \mathbb{R}^3.
+\end{align}
+$$
 
 This still leaves us with an expression of the derivative written as an integral
-involving this arbitrary function <img src="./tex/1da18d2de6d16a18e780cd6c435a2936.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/>. We would like to have a more
-compact expression to evaluate <img src="./tex/368b65f3a78ac0b3816d46b5bb5109eb.svg?invert_in_darkmode" align=middle width=16.728988649999994pt height=28.92634470000001pt/> at some query point
-<img src="./tex/ff080ac1d673fc4bf30f495bbc5bf6f7.svg?invert_in_darkmode" align=middle width=70.47928965pt height=24.65753399999998pt/> on the surface.
+involving this arbitrary function $\mathbf{y}$. We would like to have a more
+compact expression to evaluate $\frac{d A}{d \mathbf{x}}$ at some query point
+$\mathbf{u} = (u,v)$ on the surface.
 
-Since this must be true for any choice of perturbation function <img src="./tex/1da18d2de6d16a18e780cd6c435a2936.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/>, we
-can choose <img src="./tex/1da18d2de6d16a18e780cd6c435a2936.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> to be a function that is <img src="./tex/1c4e4df490c6d0cf92fc90533df5f31e.svg?invert_in_darkmode" align=middle width=25.570741349999988pt height=21.18721440000001pt/> everywhere on the domain
-except in the region just around <img src="./tex/129c5b884ff47d80be4d6261a476e9f1.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>, where <img src="./tex/1da18d2de6d16a18e780cd6c435a2936.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> makes a little
-"bump" maxing out at <img src="./tex/89aba3dee475fcff3898b0628fe54140.svg?invert_in_darkmode" align=middle width=63.66418574999999pt height=24.65753399999998pt/>. Since this bump can be made
-arbitrarily skinny, we can argue that <img src="./tex/1da18d2de6d16a18e780cd6c435a2936.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> can be factored out of the
-integral above (if <img src="./tex/e3a4a81a703fdb4c2e09a17b18818f6d.svg?invert_in_darkmode" align=middle width=40.376524649999986pt height=21.18721440000001pt/> everywhere except <img src="./tex/c5c0a2e431921ec323fec865fd2a9245.svg?invert_in_darkmode" align=middle width=40.376524649999986pt height=21.18721440000001pt/> arbitrarily close to
-<img src="./tex/129c5b884ff47d80be4d6261a476e9f1.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>, then the integral just evaluates to <img src="./tex/52cdbba1eb4fddc47169867a1330fa0d.svg?invert_in_darkmode" align=middle width=23.67578729999999pt height=22.465723500000017pt/> at
-<img src="./tex/129c5b884ff47d80be4d6261a476e9f1.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>):
+Since this must be true for any choice of perturbation function $\mathbf{y}$, we
+can choose $\mathbf{y}$ to be a function that is $=0$ everywhere on the domain
+except in the region just around $\mathbf{u}$, where $\mathbf{y}$ makes a little
+"bump" maxing out at $\mathbf{y}(\mathbf{u}) = 1$. Since this bump can be made
+arbitrarily skinny, we can argue that $\mathbf{y}$ can be factored out of the
+integral above (if $\mathbf{y}=0$ everywhere except $\mathbf{y}=1$ arbitrarily close to
+$\mathbf{u}$, then the integral just evaluates to $\Delta \mathbf{x}$ at
+$\mathbf{u}$):
 
 
-<p align="center"><img src="./tex/3d723efa6d152d1c6410f57c46342aa1.svg?invert_in_darkmode" align=middle width=140.5969389pt height=33.81208709999999pt/></p>
+$$
+\frac{d A}{d \mathbf{x}}(\mathbf{u}) = - 2 \Delta \mathbf{x} (\mathbf{u}).
+$$
 
 This reveals to us that the Laplacian of the embedding function indicates the
 direction and amount that the surface should move to decrease surface area.
 
-The Laplacian <img src="./tex/5d287dab9fa370f57a1a7ca52c46f728.svg?invert_in_darkmode" align=middle width=23.516088749999987pt height=22.831056599999986pt/> of a function <img src="./tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.81741584999999pt height=22.831056599999986pt/> on the surface does not depend on the
+The Laplacian $\Delta f$ of a function $f$ on the surface does not depend on the
 choice of parameterization. It is defined as the divergence of the gradient of
 the function or equivalently the trace of the Hessian:
 
-<p align="center"><img src="./tex/50014a787fe7579b8c1f162ab18a022c.svg?invert_in_darkmode" align=middle width=386.5432692pt height=49.315569599999996pt/></p>
+$$
+\Delta f = {\nabla}\cdot  {\nabla}f = \mathop{\text{tr}}\left( 
+\left[ 
+\begin{array}{cc}
+\frac{\partial ^{2}f}{\partial u^{2}} & \frac{\partial ^{2}f}{\partial u\partial v} \\
+\frac{\partial ^{2}f}{\partial v\partial u} & \frac{\partial ^{2}f}{\partial v^{2}} 
+\end{array}
+\right]
+\right) =
+\frac{\partial ^{2}f}{\partial u^{2}} + \frac{\partial ^{2}f}{\partial v^{2}}.
+$$
 
-If we generously choose <img src="./tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode" align=middle width=9.41027339999999pt height=14.15524440000002pt/> and <img src="./tex/6c4adbc36120d62b98deef2a20d5d303.svg?invert_in_darkmode" align=middle width=8.55786029999999pt height=14.15524440000002pt/> to vary in the principal directions <img src="./tex/67ef67c97ad06a0f412383f1a0f35dd8.svg?invert_in_darkmode" align=middle width=17.30598044999999pt height=14.15524440000002pt/>
-and <img src="./tex/5fa5023351dd2803361b6b11163f1307.svg?invert_in_darkmode" align=middle width=17.30598044999999pt height=14.15524440000002pt/> above. In this case, the Laplacian <img src="./tex/52cdbba1eb4fddc47169867a1330fa0d.svg?invert_in_darkmode" align=middle width=23.67578729999999pt height=22.465723500000017pt/> of the position function
+If we generously choose $u$ and $v$ to vary in the principal directions ${\varphi}\_{1}$
+and ${\varphi}\_{2}$ above. In this case, the Laplacian $\Delta \mathbf{x}$ of the position function
 reduces to the sum of principal curvatures times the normal (recall the
 definition of [curvature normal](#curvature-normal)):
 
-<p align="center"><img src="./tex/4bf6b8f7cfd3198e949aad1bc052fe3e.svg?invert_in_darkmode" align=middle width=125.58636255pt height=84.0148452pt/></p>
+$$
+\begin{align*}
+\Delta \mathbf{x} &= \frac{\partial ^{2}\mathbf{x}}{\partial u^{2}} + \frac{\partial ^{2}\mathbf{x}}{\partial v^{2}} \\
+    &= k_{1} \mathbf{n} + k_{2} \mathbf{n} \\
+    &= 2H\mathbf{n},
+\end{align*}
+$$
 
-where <img src="./tex/efcabc28b96b909eb308809defbb1867.svg?invert_in_darkmode" align=middle width=64.01805959999999pt height=26.76175259999998pt/> is called the _**mean curvature normal**_ vector. We have
+where $H\mathbf{n} \in  \mathbb{R}^{3}$ is called the _**mean curvature normal**_ vector. We have
 shown that the mean curvature normal is equal half the Laplacian of the
 embedding function, which is in turn the gradient of surface area.
 
 ##### Gaussian Curvature as area distortion
 
-As the product of principal curvatures, Gaussian curvature <img src="./tex/f6fbf53c0380570ad3973fcc160e79c1.svg?invert_in_darkmode" align=middle width=68.09738924999999pt height=22.831056599999986pt/> measures zero
+As the product of principal curvatures, Gaussian curvature $K = k_{1}k_{2}$ measures zero
 anytime one (or both) of the principal curvatures are zero. Intuitively, this
 happens only for surfaces that curve or bend in one direction. Imagine rolling
-up a sheet of paper. Surfaces with zero Gaussian curvature <img src="./tex/a353f3e8572d45386453eaa4b27f0bc2.svg?invert_in_darkmode" align=middle width=45.273840149999984pt height=22.465723500000017pt/> are called
+up a sheet of paper. Surfaces with zero Gaussian curvature $K = 0$ are called
 _developable surfaces_ because the can be flattened (developed) on to the flat
 plane (just as you might unroll the piece of paper) _without_ stretching or
 shearing. As a corollary, surfaces with non-zero Gaussian curvature _cannot_ be
@@ -436,24 +530,26 @@ Locally, Gaussian curvature measures how far from developable the surface is:
 how much would the local area need to stretch to become flat.
 
 First, we introduce the [Gauss map](https://en.wikipedia.org/wiki/Gauss_map), a
-continuous map <img src="./tex/bbef222054869cc83f227c4d1920bfc5.svg?invert_in_darkmode" align=middle width=83.03608004999998pt height=26.76175259999998pt/> from every point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> on the surface <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> to the unit
-sphere <img src="./tex/d95580c1170185b7f1bf99f798ef9fcc.svg?invert_in_darkmode" align=middle width=17.57992994999999pt height=26.76175259999998pt/> so that <img src="./tex/847e60608c79423b277b2e7bd9e6bf34.svg?invert_in_darkmode" align=middle width=98.56137224999998pt height=24.65753399999998pt/>, the unit normal at <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>.
+continuous map $N:\mathcal{S}\rightarrow S^{2}$ from every point $\mathbf{p}$ on the surface $\mathcal{S}$ to the unit
+sphere $S^{2}$ so that $N(\mathbf{p}) := \mathbf{n}(\mathbf{p})$, the unit normal at $\mathbf{p}$.
 
-Consider a small patch on a curved surface. Gaussian curvature <img src="./tex/d6328eaebbcd5c358f426dbea4bdbf70.svg?invert_in_darkmode" align=middle width=15.13700594999999pt height=22.465723500000017pt/> can
+Consider a small patch on a curved surface. Gaussian curvature $K$ can
 equivalently be defined as the limit of the ratio between the area
-area _swept_ out by the unit normal on the <a id=gauss-map>Gauss map</a> <img src="./tex/85b403df61d71bf1dd88dbaf8579deb9.svg?invert_in_darkmode" align=middle width=22.563292949999987pt height=22.465723500000017pt/> and 
-the area of the surface patch <img src="./tex/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode" align=middle width=12.32879834999999pt height=22.465723500000017pt/>:
+area _swept_ out by the unit normal on the <a id=gauss-map>Gauss map</a> $A_G$ and 
+the area of the surface patch $A$:
 
-<p align="center"><img src="./tex/f01cd72ac82418dc700ea079dfb02023.svg?invert_in_darkmode" align=middle width=101.23440194999999pt height=33.62942055pt/></p>
+$$
+K = \lim_{A\rightarrow 0} \frac{A_G}{A}.
+$$
 
 
 Let's consider different types of regions:
 
- - flat: <img src="./tex/c7fd05a94bba5f33ad41ca4789012009.svg?invert_in_darkmode" align=middle width=53.52204824999999pt height=22.465723500000017pt/> because the Gauss map is a point,
- - cylindrical: <img src="./tex/c7fd05a94bba5f33ad41ca4789012009.svg?invert_in_darkmode" align=middle width=53.52204824999999pt height=22.465723500000017pt/> because the Gauss map is a curve,
- - spherical: <img src="./tex/2d1cf747af9ff97e3754507d60c8c75a.svg?invert_in_darkmode" align=middle width=53.52204824999999pt height=22.465723500000017pt/> because the Gauss map will maintain positive swept-area,
+ - flat: $A_G=0$ because the Gauss map is a point,
+ - cylindrical: $A_G=0$ because the Gauss map is a curve,
+ - spherical: $A_G > 0$ because the Gauss map will maintain positive swept-area,
    and 
- - saddle-shaped: <img src="./tex/b1263473b0f4fd328120721193ffeb07.svg?invert_in_darkmode" align=middle width=53.52204824999999pt height=22.465723500000017pt/> because the area on the Gauss map will maintain
+ - saddle-shaped: $A_G < 0$ because the area on the Gauss map will maintain
    _oppositely_ oriented area (i.e., from the spherical case).
 
 ![A patch on a plane and its corresponding patch on the Gauss map.](images/gauss-map-plane.gif)
@@ -463,13 +559,16 @@ Let's consider different types of regions:
 
 Similar to the turning number theorem for curves, there exists an analogous
 [theorem for surfaces](https://en.wikipedia.org/wiki/Gauss-Bonnet_theorem)
-stating that the <a id=gauss-bonnet>total Gaussian curvature</a> must be an integer multiple of <img src="./tex/a04c31f698b09c6dd0c7687b3514164e.svg?invert_in_darkmode" align=middle width=18.179315549999988pt height=21.18721440000001pt/>:
+stating that the <a id=gauss-bonnet>total Gaussian curvature</a> must be an integer multiple of $2{\pi}$:
 
-<p align="center"><img src="./tex/961aba91aa713ae8258f629421a36b5e.svg?invert_in_darkmode" align=middle width=136.3378335pt height=37.3519608pt/></p>
+$$
+\int_S K dA = 2{\pi} {\chi}(\mathcal{S}),
+\label{equ:gauss-bonnet}
+$$
 
-where <img src="./tex/6bfe3abeee9c2ef9d81f6a5668918457.svg?invert_in_darkmode" align=middle width=34.257948449999994pt height=24.65753399999998pt/> is the [Euler
+where ${\chi}(\mathcal{S})$ is the [Euler
 characteristic](https://en.wikipedia.org/wiki/Euler_characteristic) of the
-surfaces <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> (a topological _invariant_ of the surface revealing how many
+surfaces $\mathcal{S}$ (a topological _invariant_ of the surface revealing how many
 [holes](https://en.wikipedia.org/wiki/Genus_(mathematics)) the surface has).
 
 In stark contrast to mean curvature, this theorem tells us that we cannot add
@@ -487,36 +586,56 @@ flat on the ground.
 #### Shape operator
 
 There is yet another way to arrive at principal, mean and Gaussian curvatures.
-Consider a point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> on a surface <img src="./tex/cef39aeb23a61b09d838693a0897fe03.svg?invert_in_darkmode" align=middle width=11.187179849999989pt height=22.465723500000017pt/> with unit normal vector <img src="./tex/b56595d2a30a0af329086562ca12d521.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>. If we
-pick a unit tangent vector <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> (i.e., so that <img src="./tex/db0d91aa7e9eb5266fcc930eb1b02f4b.svg?invert_in_darkmode" align=middle width=62.75073254999998pt height=21.18721440000001pt/>), then we can ask
-how does the normal <img src="./tex/b56595d2a30a0af329086562ca12d521.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> change as we move in the direction of <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> along the
+Consider a point $\mathbf{p}$ on a surface $\mathcal{S}$ with unit normal vector $\mathbf{n}$. If we
+pick a unit tangent vector $\mathbf{v}$ (i.e., so that $\mathbf{v} \cdot  \mathbf{n} = 0$), then we can ask
+how does the normal $\mathbf{n}$ change as we move in the direction of $\mathbf{v}$ along the
 surface:
 
-<p align="center"><img src="./tex/f066356ca1ab074b3dad6bb398a824b8.svg?invert_in_darkmode" align=middle width=114.98821124999999pt height=17.031940199999998pt/></p>
+$$
+S_\mathbf{p}(\mathbf{v}) := {\nabla} \mathbf{n} \cdot  \mathbf{v}
+$$
 
-we call <img src="./tex/2296c3cd641c58ee180596a79543cef2.svg?invert_in_darkmode" align=middle width=18.34475609999999pt height=22.465723500000017pt/> the [_**shape
+we call $S_\mathbf{p}$ the [_**shape
 operator**_](https://en.wikipedia.org/wiki/Differential_geometry_of_surfaces#Shape_operator)
-at the point <img src="./tex/980fcd4213d7b5d2ffcc82ec78c27ead.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/>. Just as how in the definition of [curvature normal](#curvature-normal), the
+at the point $\mathbf{p}$. Just as how in the definition of [curvature normal](#curvature-normal), the
 curvature normal must point in the normal direction, the shape operator takes
 as input a tangent vector and outputs another tangent vector (i.e., the change
 in the unit normal must be tangential to the surface; no change can occur in
 the normal direction itself).
 
 Locally, the tangent vector space is two-dimensional spanned by basis vectors
-<img src="./tex/7caf22174becccaa731fcaa799d7340d.svg?invert_in_darkmode" align=middle width=77.89937264999999pt height=26.76175259999998pt/> so we can think of the
-shape operator as a mapping from <img src="./tex/3177e934cf575c08431076a1a5479ba5.svg?invert_in_darkmode" align=middle width=18.424726649999986pt height=26.76175259999998pt/> to <img src="./tex/3177e934cf575c08431076a1a5479ba5.svg?invert_in_darkmode" align=middle width=18.424726649999986pt height=26.76175259999998pt/>. As a differential operator,
+$\mathbf{e}\_{1},\mathbf{e}\_{2} \in \mathbb{R}^{2}$ so we can think of the
+shape operator as a mapping from $\mathbb{R}^{2}$ to $\mathbb{R}^{2}$. As a differential operator,
 the shape operator is a _linear operator_. This means we can represent its
-action on a tangent vector <img src="./tex/7effb5a4c75b9fb50e8bcb8a655e1837.svg?invert_in_darkmode" align=middle width=117.04311464999999pt height=19.1781018pt/>  as a matrix:
+action on a tangent vector $\mathbf{v} = x_{1} \mathbf{e}\_{1} + x\_{2}\mathbf{e}\_{2}$  as a matrix:
 
-<p align="center"><img src="./tex/a847d0c122b10deb804b5cf91bf509e9.svg?invert_in_darkmode" align=middle width=279.1205175pt height=39.452455349999994pt/></p>
+$$
+S_\mathbf{p}(\mathbf{v}) = 
+\left[
+\begin{array}{cc}
+S_\mathbf{p}(\mathbf{e}_{1})\cdot \mathbf{e}_{1} & S_\mathbf{p}(\mathbf{e}_{1})\cdot \mathbf{e}_{2} \\
+S_\mathbf{p}(\mathbf{e}_{2})\cdot \mathbf{e}_{1} & S_\mathbf{p}(\mathbf{e}_{2})\cdot \mathbf{e}_{2}
+\end{array}
+\right] \mathbf{v}
+$$
 
 
-Given <img src="./tex/61094f7c5090cb33cc734ef9b4d935ff.svg?invert_in_darkmode" align=middle width=14.33791589999999pt height=14.611878600000017pt/> and <img src="./tex/aa13a17be39ba89a53599048c25da351.svg?invert_in_darkmode" align=middle width=14.33791589999999pt height=14.611878600000017pt/> are the principal curvature directions (as unit 2D tangent
-vectors) we can rotate our coordinate frame to align <img src="./tex/5e513183fa0be6505e7eb09ee857a2af.svg?invert_in_darkmode" align=middle width=15.216900599999992pt height=14.611878600000017pt/> and <img src="./tex/d487296e678a76df356a18f1cf2e2bff.svg?invert_in_darkmode" align=middle width=15.216900599999992pt height=14.611878600000017pt/> with the
+Given $\mathbf{r}\_{1}$ and $\mathbf{r}\_{2}$ are the principal curvature directions (as unit 2D tangent
+vectors) we can rotate our coordinate frame to align $\mathbf{e}\_{1}$ and $\mathbf{e}\_{2}$ with the
 principal curvature directions. The shape operator takes on a very special
 form:
 
-<p align="center"><img src="./tex/4fa4d113f75a8255f8e8a53ff5f582db.svg?invert_in_darkmode" align=middle width=249.3057237pt height=39.452455349999994pt/></p>
+$$
+S_\mathbf{p} = 
+\left[\mathbf{r}_{1} \quad \mathbf{r}_{2}\right]
+\left[
+\begin{array}{cc}
+k_{1} & 0 \\
+0 & k^{2}
+\end{array}
+\right]
+\left[\mathbf{r}_{1} \quad \mathbf{r}_{2}\right]^{\mathsf T}
+$$
 
 
 > Consider why the off-diagonal terms are zero. Think about the _extremality_
@@ -535,21 +654,28 @@ Curvature for curves is the change in tangent vector under an arc-length. For a
 given tangent direction on a surface, we extended this definition to define the
 normal curvature as the curvature of the curve made by interesting surface with
 a plane aligned with the chosen direction. Given two orthonormal tangent
-directions <img src="./tex/129c5b884ff47d80be4d6261a476e9f1.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> and <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> (i.e., a local parameterization), let's collect the
+directions $\mathbf{u}$ and $\mathbf{v}$ (i.e., a local parameterization), let's collect the
 normal curvature normal vectors:
 
-<p align="center"><img src="./tex/a1693ff40d4e1287d6ed0296ffb0a224.svg?invert_in_darkmode" align=middle width=418.5569157pt height=41.9471052pt/></p>
+\begin{align}
+k_\mathbf{n}(\mathbf{u},\mathbf{p})\mathbf{n} &= {\gamma}''_\mathbf{u}(\mathbf{p}) \\
+k_\mathbf{n}(\mathbf{v},\mathbf{p})\mathbf{n} &= {\gamma}''_\mathbf{v}(\mathbf{p}).
+\end{align}
 
 
 If instead we equivalent consider the _change in normal vector_ for each sliced
 curve, our curvature vectors will live in the orthogonal space: the tangent
 space. 
 
-<p align="center"><img src="./tex/58fff141a36adb43e6113df40c0ad45d.svg?invert_in_darkmode" align=middle width=418.4256318pt height=41.9471052pt/></p>
+\begin{align}
+k_\mathbf{n}(\mathbf{u},\mathbf{p})\mathbf{v} &= {\gamma}''_\mathbf{u}(\mathbf{p}) \\
+k_\mathbf{n}(\mathbf{v},\mathbf{p})\mathbf{u} &= {\gamma}''_\mathbf{v}(\mathbf{p}).
+\end{align}
 
 
-> Before we chose the normal direction by an angle <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/>, but for any tangent
-> direction <img src="./tex/129c5b884ff47d80be4d6261a476e9f1.svg?invert_in_darkmode" align=middle width=10.502226899999991pt height=14.611878600000017pt/> we can determine its correspond <img src="./tex/c6badc6a64bc17f35f233989c2d6cbaa.svg?invert_in_darkmode" align=middle width=10.75343279999999pt height=14.15524440000002pt/> so that <img src="./tex/52a5082d1ea8ebcd574b2c73c828a677.svg?invert_in_darkmode" align=middle width=116.81883674999999pt height=24.65753399999998pt/>.
+> Before we chose the normal direction by an angle ${\varphi}$, but for any tangent
+> direction $\mathbf{u}$ we can determine its correspond ${\varphi}$ so that $k_\mathbf{n}({\varphi}) =
+> k_\mathbf{n}(\mathbf{u})$.
 -->
 
 ### Discrete curvatures on surfaces
@@ -559,20 +685,24 @@ space.
 
 By now we are very familiar with the discrete Laplacian for triangle meshes:
 
-<p align="center"><img src="./tex/2c98b11a27f5472ddf4cab80dc27dadd.svg?invert_in_darkmode" align=middle width=104.53174214999999pt height=17.399144399999997pt/></p>
+$$
+\Delta f \approx  \mathbf{M}^{-1} \mathbf{L} \mathbf{f},
+$$
 
-where <img src="./tex/2fd2c03ca397d5c502202605ade1d029.svg?invert_in_darkmode" align=middle width=95.11018605pt height=26.17730939999998pt/> are the mass and cotangent matrices respectively.
+where $\mathbf{M},\mathbf{L} \in \mathbb{R}^{n\times n}$ are the mass and cotangent matrices respectively.
 
 When applied to the vertex positions, this operator gives a point-wise (or
 rather integral average) approximation of the mean curvature normal:
 
-<p align="center"><img src="./tex/c72dda0590d4586a4f51b74ca6e496a9.svg?invert_in_darkmode" align=middle width=205.85359245pt height=14.845497149999998pt/></p>
+$$
+H\mathbf{n} \approx  \mathbf{H} = \mathbf{M}^{-1} \mathbf{L} \mathbf{V} \in  \mathbb{R}^{n\times 3}.
+$$
 
 
 Stripping the magnitude off the rows of the resulting matrix would give the
 _unsigned_ mean curvature. To make sure that the sign is preserved we can check
-whether each row in <img src="./tex/930b956ef51654e0669455a2cdd62fb5.svg?invert_in_darkmode" align=middle width=14.794451099999991pt height=22.55708729999998pt/> agrees or disagrees with consistently oriented
-per-vertex normals in <img src="./tex/15de8d3756caf5b8d7e66cf1491fdf2e.svg?invert_in_darkmode" align=middle width=71.71035959999999pt height=26.76175259999998pt/>. 
+whether each row in $\mathbf{H}$ agrees or disagrees with consistently oriented
+per-vertex normals in $\mathbf{N} \in  \mathbb{R}^{n\times 3}$. 
 
 This connection between the Laplace operator and the mean curvature normal
 provides additional understanding for its use as a geometric smoothing operator
@@ -594,26 +724,30 @@ map](#gauss-map), flat faces correspond
 points on the Gauss map (contributing nothing), edges correspond to area-less
 curves (traced by their [dihedral
 angles](https://en.wikipedia.org/wiki/Dihedral_angle)), but vertices correspond
-to spherical polygons connecting face normal-points. The area <img src="./tex/9f531c9f3f1ebeef802ced46eabb0336.svg?invert_in_darkmode" align=middle width=11.87217899999999pt height=22.465723500000017pt/> subtended on
+to spherical polygons connecting face normal-points. The area ${\Omega}$ subtended on
 the Gauss map is call the [solid
 angle](https://en.wikipedia.org/wiki/Solid_angle). Conveniently, this area is
 simply the [angle
 defect](https://en.wikipedia.org/wiki/Angular_defect#Descartes.27_theorem) of
-internal angles <img src="./tex/2d1a35f7ce73a328ee93ee9bfe9f0a8c.svg?invert_in_darkmode" align=middle width=15.416760149999991pt height=22.831056599999986pt/> incident on the <img src="./tex/77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/>-th vertex contributed by each <img src="./tex/190083ef7a1625fbc75f243cffb9c96d.svg?invert_in_darkmode" align=middle width=9.81741584999999pt height=22.831056599999986pt/>-th
+internal angles ${\theta}_f$ incident on the $i$-th vertex contributed by each $f$-th
 incident face:
 
-<p align="center"><img src="./tex/4912cab4293bbf8398e618a50aea345b.svg?invert_in_darkmode" align=middle width=163.80762585pt height=40.548151049999994pt/></p>
+$$
+{\Omega}\_i = 2{\pi} - \sum\limits\_{f \in  \text{faces(i)}} {\theta}\_{if}.
+$$
 
 
 !["Gaussian Curvature and Shell Structures" [Calladine
 1986]](images/angle-defect.png)
 
 Thus, our discrete analog of locally _integrated_ Gaussian curvature is given
-as the angle defect at the <img src="./tex/77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/>-th vertex. The local integral average (or
+as the angle defect at the $i$-th vertex. The local integral average (or
 _pointwise_) discrete Gaussian curvature is the angle defect divided by the
-local area associated with the <img src="./tex/77a3b857d53fb44e33b53e4c8b68351a.svg?invert_in_darkmode" align=middle width=5.663225699999989pt height=21.68300969999999pt/>-th vertex:
+local area associated with the $i$-th vertex:
 
-<p align="center"><img src="./tex/16d794e7c1037f101e63971595a12987.svg?invert_in_darkmode" align=middle width=169.8418392pt height=52.48141304999999pt/></p>
+$$
+K_i = \frac{2{\pi} - \sum\limits_{f \in  \text{faces(i)}} {\theta}_{if}}{A_i}.
+$$
 
 
 By way of closing up the Gauss map, closed polyhedral surfaces (i.e., meshes)
@@ -621,16 +755,20 @@ will obey the
 [Gauss-Bonnet](https://en.wikipedia.org/wiki/Gauss-Bonnet_theorem)
 [above](#gauss-bonnet), too:
 
-<p align="center"><img src="./tex/b4cb2bf17f63b242a3997d141296d6cf.svg?invert_in_darkmode" align=middle width=124.83910725pt height=44.89738935pt/></p>
+$$
+\sum\limits_{i=1}^n K_i = 2{\pi} {\chi}(\mathcal{S}).
+$$
 
 
 We can connect this to [Euler's
 formula](https://en.wikipedia.org/wiki/Euler_characteristic) for polyhedra in our very first
 assignment:
 
-<p align="center"><img src="./tex/458322f94dabdbc9527841bd39b1e867.svg?invert_in_darkmode" align=middle width=202.05126314999998pt height=44.89738935pt/></p>
+$$
+\frac{1}{2{\pi}} \sum\limits_{i=1}^n K_i =  |V| - |E| + |F|,
+$$
 
-where <img src="./tex/1c4299bf1e3847240413930c7a0a782a.svg?invert_in_darkmode" align=middle width=81.18724019999999pt height=24.65753399999998pt/> are the number of vertices, edges and faces respectively.
+where $|V|, |E|, |F|$ are the number of vertices, edges and faces respectively.
 
 
 
@@ -641,26 +779,29 @@ fitting an analytic surface and _reading_ off its curvature values. Since
 planes have no curvature, the simplest type of analytic surface that will give
 a non-trivial curvature value is a quadratic surface.
 
-Thus, the algorithm proceeds as follows. For each vertex <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> of the given mesh,
+Thus, the algorithm proceeds as follows. For each vertex $\mathbf{v}$ of the given mesh,
 
  1.  gather a sampling of points in the vicinity. For simplicity, let's just
- grab all other vertices that share an edge with <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> or share an edge with a
- vertex that shares an edge with <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> (i.e., the "two-ring" of <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/>). For most
+ grab all other vertices that share an edge with $\mathbf{v}$ or share an edge with a
+ vertex that shares an edge with $\mathbf{v}$ (i.e., the "two-ring" of $\mathbf{v}$). For most
  sane meshes, this will provide enough points. Gather the positions of these
- <img src="./tex/63bb9849783d01d91403bc9a5fea12a2.svg?invert_in_darkmode" align=middle width=9.075367949999992pt height=22.831056599999986pt/> points _relative_ to <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/> (i.e., <img src="./tex/c24a23c5ffbaea48c8c7593a21285165.svg?invert_in_darkmode" align=middle width=45.78079109999998pt height=19.1781018pt/>) into a matrix <img src="./tex/0c31361d39a47f2f1283726f5561e65f.svg?invert_in_darkmode" align=middle width=68.97822194999999pt height=27.91243950000002pt/>.
+ $k$ points _relative_ to $\mathbf{v}$ (i.e., $\mathbf{v}_i - \mathbf{v}$) into a matrix $\mathbf{P} \in \mathbb{R}^{k\times 3}$ .
  2. Next, we are going to define a quadratic surface as a height field above
- some two-dimensional plane passing through <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/>. Ideally, the plane is
- orthogonal to the normal at <img src="./tex/f6fc3ac36dff143d4aac9d145fadc77e.svg?invert_in_darkmode" align=middle width=10.239687149999991pt height=14.611878600000017pt/>. To find such a plane, compute the
+ some two-dimensional plane passing through $\mathbf{v}$. Ideally, the plane is
+ orthogonal to the normal at $\mathbf{v}$. To find such a plane, compute the
  [principal-component
- analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) of <img src="./tex/384591906555413c452c93e493b2d4ec.svg?invert_in_darkmode" align=middle width=12.92230829999999pt height=22.55708729999998pt/>
- (i.e., conduct eigen decomposition on <img src="./tex/e271558c00da98acfd7fa2a6d27d49f5.svg?invert_in_darkmode" align=middle width=35.01712169999999pt height=27.91243950000002pt/>). Let <img src="./tex/d64a04e2536fcc6bcf882a18a4bbb31e.svg?invert_in_darkmode" align=middle width=67.24307534999998pt height=27.91243950000002pt/> be the coefficients for two most principal directions (call them the <img src="./tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode" align=middle width=9.41027339999999pt height=14.15524440000002pt/>-
- and <img src="./tex/6c4adbc36120d62b98deef2a20d5d303.svg?invert_in_darkmode" align=middle width=8.55786029999999pt height=14.15524440000002pt/>- directions) corresponding to each point in <img src="./tex/384591906555413c452c93e493b2d4ec.svg?invert_in_darkmode" align=middle width=12.92230829999999pt height=22.55708729999998pt/>, and let <img src="./tex/ce6e2d702a9c522b607b1a1add2fb6cd.svg?invert_in_darkmode" align=middle width=52.67676644999999pt height=27.91243950000002pt/> be the "height" of each point in the least principal direction (call
- it the <img src="./tex/31fae8b8b78ebe01cbfbe2fe53832624.svg?invert_in_darkmode" align=middle width=12.210846449999991pt height=14.15524440000002pt/>-direction).
- 3. An quadratic function as a height-field surface passing through the origin
+ analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) of $\mathbf{P}$
+ (i.e., conduct eigen decomposition on $\mathbf{P}^{\mathsf T} \mathbf{P}$). Let $\mathcal{S} \in  \mathbb{R}^{k \times 2}$ be the coefficients for two most principal directions (call them the $u$-
+ and $v$- directions) corresponding to each point in $\mathbf{P}$, and let $\mathbf{B} \in \mathbb{R}^{k}$ be the "height" of each point in the least principal direction (call
+ it the $w$-direction).
+ 3. A quadratic function as a height-field surface passing through the origin
  is given by:
-<p align="center"><img src="./tex/db56e821d2b5b5510ecaa175bb4ac666.svg?invert_in_darkmode" align=middle width=268.0307982pt height=16.66852275pt/></p>
+ 
+$$
+w = a_{1} u + a\_{2} v + a\_{3} u^{2} + a\_{4}uv + a\_{5}v^{2}.
+$$
 
-We have <img src="./tex/63bb9849783d01d91403bc9a5fea12a2.svg?invert_in_darkmode" align=middle width=9.075367949999992pt height=22.831056599999986pt/> sets of <img src="./tex/cfecde842a36413fb233cf4913fbcb8f.svg?invert_in_darkmode" align=middle width=25.27401689999999pt height=14.15524440000002pt/> values and <img src="./tex/31fae8b8b78ebe01cbfbe2fe53832624.svg?invert_in_darkmode" align=middle width=12.210846449999991pt height=14.15524440000002pt/> values. Treat this as a
+We have $k$ sets of $u,v$ values and $w$ values. Treat this as a
 least-squares fitting problem and solve for the 5 unknown coefficients.
 (`igl::pinv` is good for solving this robustly).
 
@@ -669,19 +810,41 @@ over the plane has a closed form expression. You need to derive these by hand.
 Just kidding. The shape operator can be constructed as the product of two
 matrices:
 
-<p align="center"><img src="./tex/c300d192ba79563a6b074472d88063c8.svg?invert_in_darkmode" align=middle width=214.13473125pt height=42.80407395pt/></p>
+$$
+S = -
+\left[
+\begin{array}{cc}
+e & f \\
+f & g
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+E & F \\
+F & G
+\end{array}
+\right]^{-1}
+$$
 
  known as the second and first fundamental forms respectively. The entries of
  these matrices categorize the stretch and bending in each direction:
-<p align="center"><img src="./tex/26a11f8f12a2d5f80196f7b40ccee952.svg?invert_in_darkmode" align=middle width=722.0178999pt height=40.289634pt/></p>
+ 
+$$
+E = 1+a_{1}^{2}, \\ \quad
+F = a_{1}a_{2},  \\ \quad
+G = 1+a_{2}^{2}, \\ \quad
+e = \frac{2a_{3}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}}, \\ \quad
+f = \frac{a_{4}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}}, \\ \quad
+g = \frac{2a_{5}}{\sqrt{a_{1}^{2} + 1 + a_{2}^{2}}}
+$$
 
  See Table 1 of "Estimating Differential Quantities Using Polynomial Fitting of
  Osculating Jets" [Cazals & Pouget 2003] to double check for typos :-).
 
- 5. Eigen decomposition of <img src="./tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode" align=middle width=11.027402099999989pt height=22.465723500000017pt/> reveals the principal curvatures <img src="./tex/df2a706e439b4632680202a540f27fd0.svg?invert_in_darkmode" align=middle width=15.11042279999999pt height=22.831056599999986pt/> and <img src="./tex/bce145d2ce5a01a17e36278910bfa8a4.svg?invert_in_darkmode" align=middle width=15.11042279999999pt height=22.831056599999986pt/>
- _and_ the principal tangent directions (in the <img src="./tex/ee5f11272c9cd93256bbf7ba019c3953.svg?invert_in_darkmode" align=middle width=17.96813369999999pt height=14.15524440000002pt/> PCA basis).
+ 5. Eigen decomposition of $S$ reveals the principal curvatures $k_{1}$ and $k_{2}$
+ _and_ the principal tangent directions (in the $uv$ PCA basis).
 
- 6. Lift the principal tangent directions back to world <img src="./tex/fabbfebc4049d77e28eefb36851e7538.svg?invert_in_darkmode" align=middle width=18.424726649999986pt height=26.76175259999998pt/> coordinates.
+ 6. Lift the principal tangent directions back to world $\mathbb{R}^{3}$ coordinates.
 
 ## Tasks
 
