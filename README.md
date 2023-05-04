@@ -733,8 +733,9 @@ internal angles ${\theta}_f$ incident on the $i$-th vertex contributed by each $
 incident face:
 
 $$
-{\Omega}\_i = 2{\pi} - \sum\limits\_{f \in  \text{faces(i)}} {\theta}\_{if}.
+{\Omega}_i = 2{\pi} - \sum\limits\_{f \in  \text{faces(i)}} {\theta}\_{if}.
 $$
+
 
 
 !["Gaussian Curvature and Shell Structures" [Calladine
@@ -750,13 +751,15 @@ K_i = \frac{2{\pi} - \sum\limits_{f \in  \text{faces(i)}} {\theta}_{if}}{A_i}.
 $$
 
 
+> Note: Some authors use $K_i$ for _angle defect_ at a vertex (without the divide by $A_i$). Keep in mind that angle defect has units _radians_ while curvature (and angle defect divided by local area) has units _m⁻²_.
+
 By way of closing up the Gauss map, closed polyhedral surfaces (i.e., meshes)
 will obey the
 [Gauss-Bonnet](https://en.wikipedia.org/wiki/Gauss-Bonnet_theorem)
 [above](#gauss-bonnet), too:
 
 $$
-\sum\limits_{i=1}^n K_i = 2{\pi} {\chi}(\mathcal{S}).
+\sum\limits_{i=1}^n K_i A_i = \sum\limits_{i=1}^n {\Omega}_i = 2{\pi} {\chi}(\mathcal{S}).
 $$
 
 
@@ -765,7 +768,7 @@ formula](https://en.wikipedia.org/wiki/Euler_characteristic) for polyhedra in ou
 assignment:
 
 $$
-\frac{1}{2{\pi}} \sum\limits_{i=1}^n K_i =  |V| - |E| + |F|,
+\frac{1}{2{\pi}} \sum\limits_{i=1}^n {\Omega}_i =  |V| - |E| + |F|,
 $$
 
 where $|V|, |E|, |F|$ are the number of vertices, edges and faces respectively.
