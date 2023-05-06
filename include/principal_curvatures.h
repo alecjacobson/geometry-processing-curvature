@@ -1,6 +1,10 @@
 #ifndef PRINCIPAL_CURVATURES_H
 #define PRINCIPAL_CURVATURES_H
 #include <Eigen/Core>
+
+#include "igl/pinv.h"
+#include "igl/adjacency_matrix.h"
+
 // Approximate principal curvature values and directions locally by considering
 // the two-ring neighborhood of each vertex in the mesh (`V`,`F`).
 //
