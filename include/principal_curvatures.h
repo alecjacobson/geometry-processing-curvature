@@ -10,8 +10,8 @@
 // Outputs:
 //   D1  #V by 3 list of first principal (unit) directions 
 //   D2  #V by 3 list of second principal (unit) directions 
-//   K1  #V by 3 list of first principal values (maximum curvature)
-//   K2  #V by 3 list of second principal values (minimum curvature)
+//   K1  #V by 1 list of first principal values (maximum curvature)
+//   K2  #V by 1 list of second principal values (minimum curvature)
 //
 void principal_curvatures(
   const Eigen::MatrixXd & V,
